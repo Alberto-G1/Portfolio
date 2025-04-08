@@ -237,7 +237,7 @@ function initProjectModal() {
             technologies: 'React, Node.js, MongoDB, Stripe',
             category: 'Web Development',
             link: 'https://example.com/project1',
-            images: ['project1.jpg', 'project1-detail1.jpg', 'project1-detail2.jpg']
+            images: ['images/project/project1.jpg', 'images/project/project1.jpg', 'images/project/project1.jpg', 'images/project/project1.jpg']
         },
         project2: {
             name: 'Fitness Tracker App',
@@ -247,7 +247,7 @@ function initProjectModal() {
             technologies: 'React Native, Firebase, Redux',
             category: 'App Development',
             link: 'https://example.com/project2',
-            images: ['project2.jpg', 'project2-detail1.jpg', 'project2-detail2.jpg']
+            images: ['images/project/project2.jpg', 'images/project/project2.jpg', 'images/project/project2.jpg']
         },
         project3: {
             name: 'Brand Identity Design',
@@ -257,7 +257,7 @@ function initProjectModal() {
             technologies: 'Adobe Illustrator, Photoshop, Figma',
             category: 'Design',
             link: 'https://example.com/project3',
-            images: ['project3.jpg', 'project3-detail1.jpg', 'project3-detail2.jpg']
+            images: ['images/project/project3.jpg', 'images/project/project3-.jpg', 'images/project/project3.jpg']
         },
         project4: {
             name: 'Portfolio Website',
@@ -267,7 +267,7 @@ function initProjectModal() {
             technologies: 'HTML, CSS, JavaScript, GSAP',
             category: 'Web Development',
             link: 'https://example.com/project4',
-            images: ['project4.jpg', 'project4-detail1.jpg', 'project4-detail2.jpg']
+            images: ['images/project/project4.jpg', 'images/project/project4.jpg', 'images/project/project4.jpg']
         },
         project5: {
             name: 'Food Delivery App',
@@ -277,7 +277,7 @@ function initProjectModal() {
             technologies: 'Flutter, Firebase, Google Maps API',
             category: 'App Development',
             link: 'https://example.com/project5',
-            images: ['project5.jpg', 'project5-detail1.jpg', 'project5-detail2.jpg']
+            images: ['images/project/project5.jpg', 'images/project/project5.jpg', 'images/project/project5.jpg']
         },
         project6: {
             name: 'Digital Marketing Campaign',
@@ -287,7 +287,7 @@ function initProjectModal() {
             technologies: 'Google Analytics, Facebook Ads, Mailchimp',
             category: 'Digital Marketing',
             link: 'https://example.com/project6',
-            images: ['project6.jpg', 'project6-detail1.jpg', 'project6-detail2.jpg']
+            images: ['images/project/project6.jpg', 'images/project/project6.jpg', 'images/project/project6.jpg']
         }
     };
     
