@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uniteam Theme Page</title>
+  <style>
+    /* Light Theme Colors */
+    :root {
+      --light-gray: #DFE6EC;
+      --dark-gray: #A6B0B9;
+      --accent-1: #C0392B; /* Crimson */
+      --accent-2: #2C3E50; /* Navy */
+      --text-dark: #1E2A35;
+      --background: var(--light-gray);
+      --surface: #ffffff;
+      --header-bg: var(--dark-gray);
+      --footer-bg: var(--dark-gray);
+    }
+
+    /* Dark Theme Colors */
+    body.dark {
+      --light-gray: #1E272E;
+      --dark-gray: #2F3640;
+      --accent-1: #E74C3C;
+      --accent-2: #b0d0f0; 
+      --text-dark: #ECF0F1;
+      --background: #121212;
+      --surface: #1E1E1E;
+      --header-bg: #2C3E50;
+      --footer-bg: #2C3E50;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: var(--header-bg);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: var(--accent-1);
+    }
+
+    header p {
+      margin: 0.5rem 0 0;
+      color: var(--accent-2);
+      font-size: 1.2rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--light-gray);
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+      color: white;
+    }
+
+    nav a.red {
+      background: var(--accent-1);
+    }
+
+    nav a.blue {
+      background: var(--accent-2);
+    }
+
+    nav a:hover {
+      opacity: 0.9;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: background 0.3s;
+    }
+
+    section h2 {
+      color: var(--accent-1);
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--footer-bg);
+      color: white;
+      margin-top: 2rem;
+    }
+
+    footer span {
+      color: var(--accent-2);
+    }
+
+    /* Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--accent-2);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .theme-toggle:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙 Toggle Theme</button>
+
+  <header>
+    <h1>Uniteam Project Hub</h1>
+    <p>University Project Management</p>
+  </header>
+
+  <nav>
+    <a href="#" class="red">Home</a>
+    <a href="#" class="blue">Projects</a>
+    <a href="#" class="red">Teams</a>
+    <a href="#" class="blue">Contact</a>
+  </nav>
+
+  <section>
+    <h2>Welcome to Uniteam</h2>
+    <p>
+      Uniteam is designed to help university students and staff collaborate
+      on projects effectively. With a focus on teamwork, time management, and
+      streamlined communication, we make project management simple and engaging.
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Uniteam | Powered with <span>Teamwork</span></p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
+</body>
+</html>
