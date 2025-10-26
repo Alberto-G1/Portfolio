@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Circular Favicon</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            background: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #cc5200;
+        }
+        .info {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate Circular Favicon</h1>
+    <div class="info">
+        <p>This tool will create a circular version of your profile image for use as a favicon.</p>
+        <p>Click the button below to download the circular favicon.</p>
+    </div>
+    
+    <canvas id="canvas" width="512" height="512"></canvas>
+    
+    <button onclick="generateFavicon()">Generate & Download Circular Favicon</button>
+    
+    <script>
+        function generateFavicon() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const size = 512;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+            
+            // Load the image
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                // Create circular clipping path
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                
+                // Draw image to fit the circle
+                ctx.drawImage(img, 0, 0, size, size);
+                
+                // Add circular border
+                ctx.strokeStyle = '#ff6600';
+                ctx.lineWidth = 10;
+                ctx.stroke();
+                
+                // Download the image
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'circular-favicon.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    alert('Circular favicon downloaded! Save it in your images folder and update the HTML.');
+                });
+            };
+            
+            img.onerror = function() {
+                alert('Error loading image. Make sure me.jpeg exists in images/profile/');
+            };
+            
+            img.src = 'images/profile/me.jpeg';
+        }
+        
+        // Auto-generate on load
+        window.onload = function() {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                const size = 512;
+                
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                ctx.drawImage(img, 0, 0, size, size);
+                
+                // Add border
+                ctx.strokeStyle = '#ff6600';
+                ctx.lineWidth = 10;
+                ctx.stroke();
+            };
+            img.src = 'images/profile/me.jpeg';
+        };
+    </script>
+</body>
+</html>
