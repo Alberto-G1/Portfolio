@@ -13,7 +13,58 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initAnimations();
     initScrollProgress();
+    initCVDownload();
 });
+
+// ===== CV DOWNLOAD =====
+function initCVDownload() {
+    const downloadBtn = document.getElementById('download-cv-btn');
+    
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Path to your CV
+            const cvPath = 'my-resume/my-CV.pdf';
+            
+            // Create a temporary link element
+            const link = document.createElement('a');
+            link.href = cvPath;
+            link.download = 'Albert_Nuwarinda_CV.pdf'; // The name of the downloaded file
+            
+            // Append to body, click, and remove
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Optional: Show a success message
+            showDownloadNotification();
+        });
+    }
+}
+
+// Show download notification
+function showDownloadNotification() {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = 'download-notification';
+    notification.innerHTML = '<i class="fas fa-check-circle"></i> CV Downloaded Successfully!';
+    
+    document.body.appendChild(notification);
+    
+    // Show notification
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Hide and remove notification after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
 
 // ===== SCROLL PROGRESS BAR =====
 function initScrollProgress() {
@@ -33,6 +84,7 @@ function initMenuToggle() {
     const toggleMenu = document.querySelector('.toggle-menu');
     const sidebar = document.querySelector('.sidebar');
     const content = document.querySelector('.content');
+    const navLinks = document.querySelectorAll('.nav-link');
     
     // Create overlay if it doesn't exist
     if (!document.querySelector('.menu-overlay')) {
@@ -43,30 +95,70 @@ function initMenuToggle() {
     
     const overlay = document.querySelector('.menu-overlay');
     
+    function closeSidebar() {
+        // Only close on mobile/tablet
+        if (window.innerWidth <= 1024) {
+            sidebar.classList.remove('show-menu');
+            overlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            if (toggleMenu) {
+                toggleMenu.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+    }
+    
     function toggleSidebar() {
-        console.log('Toggle sidebar called');
-        sidebar.classList.toggle('show-menu');
-        overlay.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
-        
-        // Change icon based on state
-        if (sidebar.classList.contains('show-menu')) {
-            toggleMenu.innerHTML = '<i class="fas fa-times"></i>';
-        } else {
-            toggleMenu.innerHTML = '<i class="fas fa-bars"></i>';
+        // Only toggle on mobile/tablet
+        if (window.innerWidth <= 1024) {
+            const isOpen = sidebar.classList.contains('show-menu');
+            
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('show-menu');
+                overlay.classList.add('active');
+                document.body.classList.add('no-scroll');
+                if (toggleMenu) {
+                    toggleMenu.innerHTML = '<i class="fas fa-times"></i>';
+                }
+            }
+        }
+    }
+    
+    function handleResize() {
+        // On desktop, ensure sidebar is visible and remove mobile classes
+        if (window.innerWidth > 1024) {
+            sidebar.classList.remove('show-menu');
+            overlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
         }
     }
     
     if (toggleMenu) {
-        toggleMenu.addEventListener('click', toggleSidebar);
-        console.log('Toggle menu listener added');
-    } else {
-        console.log('Toggle menu button not found');
+        toggleMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSidebar();
+        });
     }
     
     if (overlay) {
-        overlay.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', closeSidebar);
     }
+    
+    // Close sidebar when clicking nav links on mobile
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 1024 && sidebar.classList.contains('show-menu')) {
+                closeSidebar();
+            }
+        });
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', handleResize);
+    
+    // Initial check
+    handleResize();
 }
 
 
