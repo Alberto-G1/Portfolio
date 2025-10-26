@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glamazon - Salon Booking App | Nuwarinda Albert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../scripts.js"></script>
+    <style>
+        .project-detail-page {
+            padding: 100px 20px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .project-header .highlight {
+            color: var(--primary-color);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-color-light);
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .project-description {
+            background: var(--container-color);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            line-height: 1.8;
+        }
+
+        .project-description h2 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .project-features {
+            margin: 40px 0;
+        }
+
+        .project-features h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            background: var(--container-color);
+            padding: 25px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 102, 0, 0.2);
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .screenshots-gallery {
+            margin: 50px 0;
+        }
+
+        .screenshots-gallery h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-title {
+            transform: translateY(0);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color-dark);
+            transform: translateX(-5px);
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .project-detail-page {
+                padding: 80px 15px 30px;
+            }
+
+            .project-header h1 {
+                font-size: 2rem;
+            }
+
+            .project-description {
+                padding: 25px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode" style="position: fixed; top: 20px; right: 20px;">
+        <i class="fas fa-sun light-icon"></i>
+        <i class="fas fa-moon dark-icon"></i>
+    </button>
+
+    <a href="../index.html#portfolio" class="back-btn" style="position: fixed; top: 20px; left: 20px; z-index: 100;">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
+
+    <div class="project-detail-page">
+        <div class="project-header">
+            <h1>Glamazon <span class="highlight">Salon App</span></h1>
+            <p>Android Application for Salon Booking and Management</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>2023</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-code"></i>
+                    <span>Mobile Development</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Flutter & Firebase</span>
+                </div>
+            </div>
+
+            <div class="project-tags">
+                <span class="tag">Flutter</span>
+                <span class="tag">Dart</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">Authentication</span>
+                <span class="tag">Real-time Database</span>
+                <span class="tag">Push Notifications</span>
+            </div>
+        </div>
+
+        <div class="project-description">
+            <h2>About the Project</h2>
+            <p>
+                Glamazon is a comprehensive mobile application designed to revolutionize the salon booking experience. 
+                Built with Flutter and Firebase, this app provides a seamless platform for customers to discover, book, 
+                and manage salon appointments while enabling salon owners to efficiently manage their business operations.
+            </p>
+            <p>
+                The application features a beautiful, intuitive interface with role-based access control, allowing both 
+                customers and salon owners to have tailored experiences. From browsing available services to managing 
+                bookings and processing payments, Glamazon handles the entire salon appointment lifecycle.
+            </p>
+        </div>
+
+        <div class="project-features">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-user-check"></i>
+                    <h3>User Authentication</h3>
+                    <p>Secure sign-up and login system with email verification and social media integration.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Easy Booking</h3>
+                    <p>Intuitive booking interface allowing users to schedule appointments at their convenience.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Role-Based Access</h3>
+                    <p>Separate interfaces for customers and salon owners with appropriate permissions.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-search"></i>
+                    <h3>Salon Discovery</h3>
+                    <p>Browse and search for salons based on location, services, and ratings.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bell"></i>
+                    <h3>Push Notifications</h3>
+                    <p>Real-time notifications for booking confirmations, reminders, and updates.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Business Analytics</h3>
+                    <p>Comprehensive dashboard for salon owners to track bookings and revenue.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="screenshots-gallery">
+            <h2>App Screenshots</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(0)">
+                    <img src="../images/projects/glamazon(salon-app)/splash-screen.jpg" alt="Splash Screen">
+                    <div class="gallery-item-title">
+                        <h4>Splash Screen</h4>
+                        <p>Beautiful animated splash screen</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(1)">
+                    <img src="../images/projects/glamazon(salon-app)/landing-page.jpg" alt="Landing Page">
+                    <div class="gallery-item-title">
+                        <h4>Landing Page</h4>
+                        <p>Welcoming interface with key features</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="../images/projects/glamazon(salon-app)/join-us-pop-up-beforelogging in.jpg" alt="Join Us Pop-up">
+                    <div class="gallery-item-title">
+                        <h4>Join Us Prompt</h4>
+                        <p>User engagement before login</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="../images/projects/glamazon(salon-app)/join-us-selection.jpg" alt="Role Selection">
+                    <div class="gallery-item-title">
+                        <h4>Role Selection</h4>
+                        <p>Choose between customer or salon owner</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="../images/projects/glamazon(salon-app)/login-screen.jpg" alt="Login Screen">
+                    <div class="gallery-item-title">
+                        <h4>Login Screen</h4>
+                        <p>Secure authentication interface</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="../images/projects/glamazon(salon-app)/signup-screen.jpg" alt="Sign Up Screen">
+                    <div class="gallery-item-title">
+                        <h4>Sign Up Screen</h4>
+                        <p>Easy registration process</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Gallery Image">
+        </div>
+        <span class="lightbox-nav lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+
+    <script>
+        const images = [
+            '../images/projects/glamazon(salon-app)/splash-screen.jpg',
+            '../images/projects/glamazon(salon-app)/landing-page.jpg',
+            '../images/projects/glamazon(salon-app)/join-us-pop-up-beforelogging in.jpg',
+            '../images/projects/glamazon(salon-app)/join-us-selection.jpg',
+            '../images/projects/glamazon(salon-app)/login-screen.jpg',
+            '../images/projects/glamazon(salon-app)/signup-screen.jpg'
+        ];
+
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox-img').src = images[index];
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.classList.contains('lightbox') || event.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function changeImage(direction, event) {
+            event.stopPropagation();
+            currentImageIndex += direction;
+            
+            if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            }
+            
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                if (event.key === 'ArrowLeft') {
+                    changeImage(-1, event);
+                } else if (event.key === 'ArrowRight') {
+                    changeImage(1, event);
+                } else if (event.key === 'Escape') {
+                    closeLightbox({target: lightbox});
+                }
+            }
+        });
+    </script>
+</body>
+</html>

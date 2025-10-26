@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobQuest - Job Search App | Nuwarinda Albert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../scripts.js"></script>
+    <style>
+        .project-detail-page {
+            padding: 100px 20px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .project-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .project-header .highlight {
+            color: var(--primary-color);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-color-light);
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .project-description {
+            background: var(--container-color);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            line-height: 1.8;
+        }
+
+        .project-description h2 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .project-features {
+            margin: 40px 0;
+        }
+
+        .project-features h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            background: var(--container-color);
+            padding: 25px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 102, 0, 0.2);
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .screenshots-gallery {
+            margin: 50px 0;
+        }
+
+        .screenshots-gallery h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-title {
+            transform: translateY(0);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color-dark);
+            transform: translateX(-5px);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .project-detail-page {
+                padding: 80px 15px 30px;
+            }
+
+            .project-header h1 {
+                font-size: 2rem;
+            }
+
+            .project-description {
+                padding: 25px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode" style="position: fixed; top: 20px; right: 20px;">
+        <i class="fas fa-sun light-icon"></i>
+        <i class="fas fa-moon dark-icon"></i>
+    </button>
+
+    <a href="../index.html#portfolio" class="back-btn" style="position: fixed; top: 20px; left: 20px; z-index: 100;">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
+
+    <div class="project-detail-page">
+        <div class="project-header">
+            <h1>JobQuest <span class="highlight">App</span></h1>
+            <p>Complete Job Search and Recruitment Platform</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>2024</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-code"></i>
+                    <span>Mobile Development</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Flutter & Firebase</span>
+                </div>
+            </div>
+
+            <div class="project-tags">
+                <span class="tag">Flutter</span>
+                <span class="tag">Dart</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">Authentication</span>
+                <span class="tag">Cloud Firestore</span>
+                <span class="tag">Push Notifications</span>
+            </div>
+        </div>
+
+        <div class="project-description">
+            <h2>About the Project</h2>
+            <p>
+                JobQuest is a comprehensive mobile application that connects job seekers with employers. The app provides 
+                a seamless platform for job searching, application management, and recruitment processes. With an intuitive 
+                interface and powerful features, JobQuest simplifies the job hunting experience for both job seekers and employers.
+            </p>
+            <p>
+                The application features role-based dashboards for job seekers and employers, advanced job search filters, 
+                profile management, real-time notifications, and secure authentication. Built with Flutter and Firebase, 
+                JobQuest delivers a smooth, responsive experience across all devices.
+            </p>
+        </div>
+
+        <div class="project-features">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Secure Authentication</h3>
+                    <p>Multi-factor authentication with email verification and password recovery.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Dual Role System</h3>
+                    <p>Separate experiences for job seekers and employers with tailored dashboards.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-search"></i>
+                    <h3>Advanced Search</h3>
+                    <p>Filter jobs by location, salary, industry, and experience level.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bookmark"></i>
+                    <h3>Save Jobs</h3>
+                    <p>Bookmark interesting positions for later review and application.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bell"></i>
+                    <h3>Real-time Notifications</h3>
+                    <p>Instant updates on application status and new job postings.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-user-edit"></i>
+                    <h3>Profile Management</h3>
+                    <p>Create and edit professional profiles with resume upload.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="screenshots-gallery">
+            <h2>App Screenshots</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(0)">
+                    <img src="../images/projects/jobquest-app/welcome-page.jpg" alt="Welcome Page">
+                    <div class="gallery-item-title">
+                        <h4>Welcome Page</h4>
+                        <p>Attractive onboarding screen</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(1)">
+                    <img src="../images/projects/jobquest-app/role-selection-page.jpg" alt="Role Selection">
+                    <div class="gallery-item-title">
+                        <h4>Role Selection</h4>
+                        <p>Choose between job seeker or employer</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="../images/projects/jobquest-app/login-page.jpg" alt="Login Page">
+                    <div class="gallery-item-title">
+                        <h4>Login Page</h4>
+                        <p>Secure authentication interface</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="../images/projects/jobquest-app/signup-page.jpg" alt="Sign Up Page">
+                    <div class="gallery-item-title">
+                        <h4>Sign Up Page</h4>
+                        <p>Easy registration process</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="../images/projects/jobquest-app/forgot-password.jpg" alt="Forgot Password">
+                    <div class="gallery-item-title">
+                        <h4>Password Recovery</h4>
+                        <p>Reset forgotten passwords</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="../images/projects/jobquest-app/otp-verification-page.jpg" alt="OTP Verification">
+                    <div class="gallery-item-title">
+                        <h4>OTP Verification</h4>
+                        <p>Secure two-factor authentication</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(6)">
+                    <img src="../images/projects/jobquest-app/jobseeker-dashboard.jpg" alt="Job Seeker Dashboard">
+                    <div class="gallery-item-title">
+                        <h4>Job Seeker Dashboard</h4>
+                        <p>Personalized job recommendations</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(7)">
+                    <img src="../images/projects/jobquest-app/employer-dashboard-page.jpg" alt="Employer Dashboard">
+                    <div class="gallery-item-title">
+                        <h4>Employer Dashboard</h4>
+                        <p>Manage job postings and applications</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(8)">
+                    <img src="../images/projects/jobquest-app/search-jobs-page.jpg" alt="Search Jobs">
+                    <div class="gallery-item-title">
+                        <h4>Job Search</h4>
+                        <p>Advanced filtering options</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(9)">
+                    <img src="../images/projects/jobquest-app/saved-jobs-page.jpg" alt="Saved Jobs">
+                    <div class="gallery-item-title">
+                        <h4>Saved Jobs</h4>
+                        <p>Your bookmarked positions</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(10)">
+                    <img src="../images/projects/jobquest-app/jobseeker-profile-page.jpg" alt="Profile">
+                    <div class="gallery-item-title">
+                        <h4>User Profile</h4>
+                        <p>Professional profile management</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(11)">
+                    <img src="../images/projects/jobquest-app/seeker-edit-profile-page.jpg" alt="Edit Profile">
+                    <div class="gallery-item-title">
+                        <h4>Edit Profile</h4>
+                        <p>Update your information</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(12)">
+                    <img src="../images/projects/jobquest-app/notifications-page.jpg" alt="Notifications">
+                    <div class="gallery-item-title">
+                        <h4>Notifications</h4>
+                        <p>Stay updated with alerts</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(13)">
+                    <img src="../images/projects/jobquest-app/settings-page.jpg" alt="Settings">
+                    <div class="gallery-item-title">
+                        <h4>Settings</h4>
+                        <p>Customize your experience</p>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(14)">
+                    <img src="../images/projects/jobquest-app/drawer.jpg" alt="Navigation Drawer">
+                    <div class="gallery-item-title">
+                        <h4>Navigation Drawer</h4>
+                        <p>Easy app navigation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="changeImage(-1, event)">&#10094;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Gallery Image">
+        </div>
+        <span class="lightbox-nav lightbox-next" onclick="changeImage(1, event)">&#10095;</span>
+    </div>
+
+    <script>
+        const images = [
+            '../images/projects/jobquest-app/welcome-page.jpg',
+            '../images/projects/jobquest-app/role-selection-page.jpg',
+            '../images/projects/jobquest-app/login-page.jpg',
+            '../images/projects/jobquest-app/signup-page.jpg',
+            '../images/projects/jobquest-app/forgot-password.jpg',
+            '../images/projects/jobquest-app/otp-verification-page.jpg',
+            '../images/projects/jobquest-app/jobseeker-dashboard.jpg',
+            '../images/projects/jobquest-app/employer-dashboard-page.jpg',
+            '../images/projects/jobquest-app/search-jobs-page.jpg',
+            '../images/projects/jobquest-app/saved-jobs-page.jpg',
+            '../images/projects/jobquest-app/jobseeker-profile-page.jpg',
+            '../images/projects/jobquest-app/seeker-edit-profile-page.jpg',
+            '../images/projects/jobquest-app/notifications-page.jpg',
+            '../images/projects/jobquest-app/settings-page.jpg',
+            '../images/projects/jobquest-app/drawer.jpg'
+        ];
+
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox-img').src = images[index];
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.classList.contains('lightbox') || event.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function changeImage(direction, event) {
+            event.stopPropagation();
+            currentImageIndex += direction;
+            
+            if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            }
+            
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+        }
+
+        document.addEventListener('keydown', function(event) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                if (event.key === 'ArrowLeft') {
+                    changeImage(-1, event);
+                } else if (event.key === 'ArrowRight') {
+                    changeImage(1, event);
+                } else if (event.key === 'Escape') {
+                    closeLightbox({target: lightbox});
+                }
+            }
+        });
+    </script>
+</body>
+</html>

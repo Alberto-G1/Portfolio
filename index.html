@@ -15,6 +15,9 @@
     <script src="scripts.js"></script>
 </head>
 <body class="light-mode">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress-bar"></div>
+    
     <div class="container">
 
         <!-- Sidebar -->
@@ -32,10 +35,10 @@
                 <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
             <div class="social-links">
-                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/albert-nuwarinda-129841351/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Alberto-G1" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="pages/coming-soon.html" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="pages/coming-soon.html" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
         
@@ -87,10 +90,10 @@
                 
                 <div class="about-container">
                     <div class="about-img">
-                        <img src="images/profile/profie.jpg" alt="About Me Image">
+                        <img src="images/profile/albert.jpeg" alt="About Me Image">
                         <div class="experience-badge">
-                            <span>1+</span>
-                            <span>Year</span>
+                            <span>3+</span>
+                            <span>Years</span>
                         </div>
                     </div>
                     
@@ -133,7 +136,7 @@
                             </div>
                         </div>
                         
-                        <a href="#" class="resume-btn">
+                        <a href="pages/coming-soon.html" class="resume-btn">
                             Download Resume
                             <i class="fas fa-download"></i>
                         </a>
@@ -550,7 +553,7 @@
                 
                 <div class="portfolio-cards">
                     <!-- Portfolio Card 1 -->
-                    <div class="portfolio-card" data-category="web" onclick="showProjectDetails('project1')">
+                    <div class="portfolio-card" data-category="web" onclick="window.location.href='pages/coming-soon.html'">
                         <div class="portfolio-img">
                             <img src="images/project/ecommerce.jpg" alt="E-commerce Website">
                         </div>
@@ -562,7 +565,7 @@
                     </div>
                     
                     <!-- Portfolio Card 2 -->
-                    <div class="portfolio-card" data-category="ai" onclick="showProjectDetails('project2')">
+                    <div class="portfolio-card" data-category="ai" onclick="window.location.href='pages/coming-soon.html'">
                         <div class="portfolio-img">
                             <img src="images/project/coffee-ai.jpg" alt="Coffee Bean AI">
                         </div>
@@ -574,7 +577,7 @@
                     </div>
                     
                     <!-- Portfolio Card 3 -->
-                    <div class="portfolio-card" data-category="system" onclick="showProjectDetails('project3')">
+                    <div class="portfolio-card" data-category="system" onclick="window.location.href='pages/coming-soon.html'">
                         <div class="portfolio-img">
                             <img src="images/project/library.jpg" alt="Library Management System">
                         </div>
@@ -586,9 +589,9 @@
                     </div>
                     
                     <!-- Portfolio Card 4 -->
-                    <div class="portfolio-card" data-category="app" onclick="showProjectDetails('project4')">
+                    <div class="portfolio-card" data-category="app" onclick="window.location.href='pages/glamazon.html'">
                         <div class="portfolio-img">
-                            <img src="images/project/glamazon.jpg" alt="Glamazon App">
+                            <img src="images/projects/glamazon(salon-app)/landing-page.jpg" alt="Glamazon App">
                         </div>
                         <div class="portfolio-overlay">
                             <h4>Glamazon Application</h4>
@@ -596,9 +599,33 @@
                             <button class="view-more-btn">View Details</button>
                         </div>
                     </div>
+
+                    <!-- Portfolio Card 7 - JobQuest -->
+                    <div class="portfolio-card" data-category="app" onclick="window.location.href='pages/jobquest.html'">
+                        <div class="portfolio-img">
+                            <img src="images/projects/jobquest-app/welcome-page.jpg" alt="JobQuest App">
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h4>JobQuest Application</h4>
+                            <p>Job search and recruitment platform connecting job seekers with employers.</p>
+                            <button class="view-more-btn">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Card 8 - Veloce -->
+                    <div class="portfolio-card" data-category="app" onclick="window.location.href='pages/veloce.html'">
+                        <div class="portfolio-img">
+                            <img src="images/projects/veloce(bike-app)/dashboard.jpg" alt="Veloce Bike App">
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h4>Veloce Bike App</h4>
+                            <p>Smart bike rental system with QR code scanning and real-time tracking.</p>
+                            <button class="view-more-btn">View Details</button>
+                        </div>
+                    </div>
                     
                     <!-- Portfolio Card 5 -->
-                    <div class="portfolio-card" data-category="system" onclick="showProjectDetails('project5')">
+                    <div class="portfolio-card" data-category="system" onclick="window.location.href='pages/coming-soon.html'">
                         <div class="portfolio-img">
                             <img src="images/project/pgb.jpg" alt="Pahappa Goals Bucket">
                         </div>
@@ -610,7 +637,7 @@
                     </div>
                     
                     <!-- Portfolio Card 6 -->
-                    <div class="portfolio-card" data-category="system" onclick="showProjectDetails('project6')">
+                    <div class="portfolio-card" data-category="system" onclick="window.location.href='pages/coming-soon.html'">
                         <div class="portfolio-img">
                             <img src="images/project/medcare.jpg" alt="MedCare HMS">
                         </div>
@@ -714,10 +741,10 @@
                         </div>
                         
                         <div class="social-links-contact">
-                            <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="https://github.com" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/albert-nuwarinda-129841351/" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="pages/coming-soon.html" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="https://github.com/Alberto-G1" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="pages/coming-soon.html" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     
@@ -796,10 +823,10 @@
                 <p><i class="fas fa-envelope"></i> nuwarindaalbertgrande@gmail.com</p>
                 <p><i class="fas fa-globe"></i> www.excellentwebsite.com</p>
                 <div class="footer-social">
-                    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/albert-nuwarinda-129841351/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="pages/coming-soon.html" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/Alberto-G1" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="pages/coming-soon.html" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -843,7 +870,23 @@
                 tech: "Flutter, Firebase",
                 date: "2023",
                 category: "Mobile Development",
-                link: "#"
+                link: "pages/glamazon.html"
+            },
+            project7: {
+                name: "JobQuest Application",
+                description: "Comprehensive job search and recruitment platform that connects job seekers with employers. Features include advanced job search filters, application tracking, profile management, and real-time notifications.",
+                tech: "Flutter, Firebase, Cloud Firestore",
+                date: "2024",
+                category: "Mobile Development",
+                link: "pages/jobquest.html"
+            },
+            project8: {
+                name: "Veloce Bike App",
+                description: "Smart bike rental application with QR code scanning for quick bike unlocking, real-time bike tracking, rental history, and seamless payment integration for urban mobility.",
+                tech: "Flutter, Firebase, QR Scanner",
+                date: "2024",
+                category: "Mobile Development",
+                link: "pages/veloce.html"
             },
             project5: {
                 name: "Pahappa Goals Bucket (PGB) System",

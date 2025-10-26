@@ -12,7 +12,21 @@ document.addEventListener('DOMContentLoaded', function() {
     initTestimonialSlider();
     initContactForm();
     initAnimations();
+    initScrollProgress();
 });
+
+// ===== SCROLL PROGRESS BAR =====
+function initScrollProgress() {
+    const progressBar = document.querySelector('.scroll-progress-bar');
+    
+    if (progressBar) {
+        window.addEventListener('scroll', function() {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.pageYOffset / windowHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+    }
+}
 
 // ===== MENU TOGGLE =====
 function initMenuToggle() {
