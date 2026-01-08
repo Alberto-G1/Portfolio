@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CornerShop - Multi-Vendor E-Commerce | Nuwarinda Albert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/profile/circular-favicon.png" type="image/svg+xml">
+    <style>
+        :root {
+            --primary-color: #ff6600;
+            --primary-color-light: #ff8533;
+            --primary-color-dark: #cc5200;
+            --text-color: #333;
+            --text-color-light: #666;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        body.dark-mode {
+            --text-color: #f5f5f5;
+            --text-color-light: #b0b0b0;
+            --bg-color: #1a1a1a;
+            --card-bg: #2a2a2a;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            gap: 0.8rem;
+        }
+
+        #theme-toggle {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        #theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Content Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .section p, .section li {
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Video Section */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 2rem auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255,102,0,0.2);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,102,0,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            transform: translateY(0);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .team-member i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .team-member h4 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .lightbox-nav {
+                font-size: 30px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Header -->
+    <div class="header">
+        <a href="../index.html#portfolio" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Portfolio
+        </a>
+        <button id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>🛍️ CornerShop</h1>
+        <p>A comprehensive Django-based multi-vendor e-commerce marketplace that connects local businesses with customers, enabling seamless online shopping experiences.</p>
+        <div class="tech-stack">
+            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+            <span class="tech-badge"><i class="fas fa-server"></i> Django 5.0.2</span>
+            <span class="tech-badge"><i class="fas fa-database"></i> SQLite/MySQL</span>
+            <span class="tech-badge"><i class="fas fa-code"></i> HTML/CSS</span>
+            <span class="tech-badge"><i class="fab fa-bootstrap"></i> Bootstrap Icons</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Project Overview -->
+        <section class="section">
+            <h2>📋 Project Overview</h2>
+            <p><strong>CornerShop</strong> transforms traditional local shopping into a modern digital marketplace where business owners can register businesses, manage inventory, and track sales, while customers enjoy a unified shopping experience across different sellers.</p>
+            <p>The platform supports multiple vendors with role-based access, real-time inventory tracking, and a comprehensive dashboard for business analytics.</p>
+        </section>
+
+        <!-- Demo Video -->
+        <section class="section">
+            <h2>🎥 Demo Video</h2>
+            <div class="video-container">
+                <video controls>
+                    <source src="../images/projects/CornerShop/Cornershop-Demo-Video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="section">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-store"></i>
+                    <h3>Multi-Vendor System</h3>
+                    <p>Complete business registration, approval workflow, and independent product management for each vendor.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>E-Commerce Functionality</h3>
+                    <p>Full product catalog with category filtering, search, shopping cart, and secure checkout process.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-box"></i>
+                    <h3>Inventory Management</h3>
+                    <p>Real-time stock tracking, low stock alerts, automatic deduction on purchase, and prevent overselling.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>User Management</h3>
+                    <p>User profiles with avatar upload, shipping addresses, order history, and password management.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Business Dashboard</h3>
+                    <p>Product CRUD operations, order tracking, sales analytics, and low stock alerts for business owners.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure Authentication</h3>
+                    <p>Role-based access control with different views for customers, business owners, and administrators.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Architecture -->
+        <section class="section">
+            <h2>🏗️ System Architecture</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Django Apps Structure</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><strong>conerapp:</strong> Core application with authentication, product catalog, and business management</li>
+                        <li><strong>cart:</strong> Session-based shopping cart with real-time updates</li>
+                        <li><strong>payment:</strong> Checkout workflow and order management</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Database Models</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><strong>UserProfile:</strong> Extended user information</li>
+                        <li><strong>Business:</strong> Business entities with approval</li>
+                        <li><strong>Product:</strong> Product catalog with stock</li>
+                        <li><strong>Order/OrderItem:</strong> Purchase tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots Gallery -->
+        <section class="section">
+            <h2>📸 Screenshots</h2>
+            <div class="gallery">
+                <div class="gallery-item" onclick="openLightbox(0)">
+                    <img src="../images/projects/CornerShop/Welcomepage.png" alt="Welcome Page">
+                    <div class="gallery-item-overlay">
+                        <h4>Welcome Page</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(1)">
+                    <img src="../images/projects/CornerShop/Home-page.png" alt="Home Page">
+                    <div class="gallery-item-overlay">
+                        <h4>Home Page</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="../images/projects/CornerShop/Customer home page.png" alt="Customer Dashboard">
+                    <div class="gallery-item-overlay">
+                        <h4>Customer Dashboard</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="../images/projects/CornerShop/Shop Page.png" alt="Shop Page">
+                    <div class="gallery-item-overlay">
+                        <h4>Shop Page</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="../images/projects/CornerShop/Cart page.png" alt="Shopping Cart">
+                    <div class="gallery-item-overlay">
+                        <h4>Shopping Cart</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="../images/projects/CornerShop/Checkout Page.png" alt="Checkout Page">
+                    <div class="gallery-item-overlay">
+                        <h4>Checkout Page</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(6)">
+                    <img src="../images/projects/CornerShop/ProfileView page.png" alt="User Profile">
+                    <div class="gallery-item-overlay">
+                        <h4>User Profile</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(7)">
+                    <img src="../images/projects/CornerShop/Profile-edit page.png" alt="Edit Profile">
+                    <div class="gallery-item-overlay">
+                        <h4>Edit Profile</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(8)">
+                    <img src="../images/projects/CornerShop/About Page.png" alt="About Page">
+                    <div class="gallery-item-overlay">
+                        <h4>About Page</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(9)">
+                    <img src="../images/projects/CornerShop/contact page.png" alt="Contact Page">
+                    <div class="gallery-item-overlay">
+                        <h4>Contact Page</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(10)">
+                    <img src="../images/projects/CornerShop/Bussiness ownerpages/Bussiness owner welcome page.png" alt="Business Owner Dashboard">
+                    <div class="gallery-item-overlay">
+                        <h4>Business Owner Dashboard</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(11)">
+                    <img src="../images/projects/CornerShop/Bussiness ownerpages/Add product page.png" alt="Add Product Page">
+                    <div class="gallery-item-overlay">
+                        <h4>Add Product</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(12)">
+                    <img src="../images/projects/CornerShop/Bussiness ownerpages/Order managemt page.png" alt="Order Management">
+                    <div class="gallery-item-overlay">
+                        <h4>Order Management</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(13)">
+                    <img src="../images/projects/CornerShop/Bussiness ownerpages/Bussiness Analytics page.png" alt="Business Analytics">
+                    <div class="gallery-item-overlay">
+                        <h4>Business Analytics</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Roles -->
+        <section class="section">
+            <h2>👥 User Roles</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-user"></i>
+                    <h3>Customers</h3>
+                    <p>Browse products, add to cart, complete purchases, manage profile and shipping addresses, view order history.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Business Owners</h3>
+                    <p>Register businesses, manage products, set pricing and stock, view orders, access analytics dashboard.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Administrators</h3>
+                    <p>Full platform access, user management, business approval workflow, platform configuration.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Team -->
+        <section class="section">
+            <h2>🤝 Development Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <i class="fas fa-user-tie"></i>
+                    <h4>Nuwarinda Albert</h4>
+                    <p>Lead Developer</p>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user-cog"></i>
+                    <h4>Alinda Tracy</h4>
+                    <p>Developer</p>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user-cog"></i>
+                    <h4>Katushabe Annet</h4>
+                    <p>Developer</p>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user-cog"></i>
+                    <h4>Nabawanga Afuwa</h4>
+                    <p>Developer</p>
+                </div>
+                <div class="team-member">
+                    <i class="fas fa-user-cog"></i>
+                    <h4>Tumwebaze Calvin</h4>
+                    <p>Developer</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Methodology -->
+        <section class="section">
+            <h2>📝 Development Methodology</h2>
+            <p><strong>Extreme Programming (XP)</strong> - The team followed agile development practices including:</p>
+            <ul style="color: var(--text-color-light); margin-left: 2rem;">
+                <li>Continuous integration and testing</li>
+                <li>Pair programming sessions</li>
+                <li>Regular code reviews</li>
+                <li>Incremental design improvements</li>
+                <li>User acceptance testing (UAT)</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</span>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="">
+        <span class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check for saved theme
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.classList.remove('light-mode', 'dark-mode');
+        body.classList.add(currentTheme + '-mode');
+        updateThemeIcon();
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+            }
+            updateThemeIcon();
+        });
+
+        function updateThemeIcon() {
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // Lightbox functionality
+        const images = [
+            '../images/projects/CornerShop/Welcomepage.png',
+            '../images/projects/CornerShop/Home-page.png',
+            '../images/projects/CornerShop/Customer home page.png',
+            '../images/projects/CornerShop/Shop Page.png',
+            '../images/projects/CornerShop/Cart page.png',
+            '../images/projects/CornerShop/Checkout Page.png',
+            '../images/projects/CornerShop/ProfileView page.png',
+            '../images/projects/CornerShop/Profile-edit page.png',
+            '../images/projects/CornerShop/About Page.png',
+            '../images/projects/CornerShop/contact page.png',
+            '../images/projects/CornerShop/Bussiness ownerpages/Bussiness owner welcome page.png',
+            '../images/projects/CornerShop/Bussiness ownerpages/Add product page.png',
+            '../images/projects/CornerShop/Bussiness ownerpages/Order managemt page.png',
+            '../images/projects/CornerShop/Bussiness ownerpages/Bussiness Analytics page.png'
+        ];
+
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'ArrowRight') changeImage(1);
+            }
+        });
+
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
