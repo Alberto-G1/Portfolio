@@ -1,0 +1,18 @@
+/* Sits above everything (the customizer is 1000/1001, the navbar 900). */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  transition:
+    opacity 0.5s ease,
+    visibility 0s linear 0.5s;
+}
+
+.preloader.is-leaving {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}

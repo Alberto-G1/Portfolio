@@ -1,0 +1,50 @@
+/* A fixed 16:10 frame: the picture never changes the layout whatever its own shape. */
+.project-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg-alt);
+  container-type: inline-size; /* the initials scale with the frame they are in (cqi) */
+}
+
+.project-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Generated cover: the project colour fading into the page, a big faint category icon, the initials */
+.project-cover--art {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--project-color) 38%, transparent), transparent 55%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--project-color) 52%, var(--bg)),
+      color-mix(in srgb, var(--project-color) 14%, var(--bg))
+    );
+}
+
+.project-cover-icon {
+  position: absolute;
+  right: -6%;
+  bottom: -14%;
+  width: 62%;
+  height: 78%;
+  color: var(--project-color);
+  opacity: 0.2;
+}
+
+.project-cover-initials {
+  position: relative;
+  color: color-mix(in srgb, var(--project-color) 68%, var(--heading));
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 9cqi + 1rem, 5rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-shadow: 0 2px 22px color-mix(in srgb, var(--project-color) 45%, transparent);
+}

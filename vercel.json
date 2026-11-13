@@ -1,0 +1,30 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/pages/cornershop.html", "destination": "/projects/ecommerce-prototype", "permanent": true },
+    { "source": "/pages/glamazon.html", "destination": "/projects/glamazon", "permanent": true },
+    { "source": "/pages/jobquest.html", "destination": "/projects/jobquest", "permanent": true },
+    { "source": "/pages/veloce.html", "destination": "/projects/veloce", "permanent": true },
+    { "source": "/pages/coming-soon.html", "destination": "/", "permanent": true },
+    { "source": "/old.html", "destination": "/", "permanent": true },
+    { "source": "/my-resume/my-CV.pdf", "destination": "/Nuwarinda_Albert_CV.pdf", "permanent": true }
+  ],
+  "rewrites": [{ "source": "/((?!assets/).*)", "destination": "/index.html" }],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

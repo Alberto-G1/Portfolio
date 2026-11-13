@@ -1,0 +1,122 @@
+.nf {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: calc(var(--navbar-height) + 2rem) 1.5rem 4rem;
+  overflow: hidden;
+  place-items: center;
+  isolation: isolate;
+  background: var(--bg);
+}
+
+.nf-decor {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.nf-watermark {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  width: min(34rem, 70vw);
+  height: auto;
+  opacity: 0.07;
+  transform: translateX(-50%);
+}
+
+.nf-dots--top {
+  top: 8rem;
+  right: 6%;
+  width: 12rem;
+  height: 8rem;
+}
+
+.nf-dots--bottom {
+  bottom: 9rem;
+  left: 4%;
+  width: 8rem;
+  height: 8rem;
+}
+
+.nf-swoosh {
+  width: min(32vw, 26rem);
+  height: min(10vw, 8rem);
+  opacity: 0.4;
+}
+
+.nf-card {
+  display: flex;
+  width: min(100%, 38rem);
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  box-shadow:
+    0 14px 30px -18px color-mix(in srgb, var(--accent) 60%, transparent),
+    var(--shadow);
+}
+
+/* the gold-outlined pill, like the section labels */
+.nf-pill {
+  padding: 0.5rem 1.6rem;
+  color: var(--accent-text);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  background: color-mix(in srgb, var(--surface-solid) 45%, transparent);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.nf-title {
+  margin-top: 1.4rem;
+  font-size: clamp(2.3rem, 1rem + 4.2vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.nf-text {
+  max-width: 26rem;
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.95rem 2rem;
+  margin-top: 2rem;
+  color: var(--accent-contrast);
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+  background: linear-gradient(180deg, var(--hover), var(--accent));
+  border-radius: 999px;
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 42%, transparent);
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.nf-btn:hover {
+  box-shadow: 0 0 34px color-mix(in srgb, var(--accent) 65%, transparent);
+  transform: translateY(-2px);
+}
+
+.nf-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-btn:hover {
+    transform: none;
+  }
+}

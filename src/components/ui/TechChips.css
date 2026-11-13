@@ -1,0 +1,74 @@
+.tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.7rem 0.28rem 0.55rem;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--surface-solid) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  border-radius: 999px;
+}
+
+/*
+  Icon colour: --chip-color is the brand colour from techIcons.js (without one, the theme accent).
+  Dark mode: never darker than OKLCH lightness 0.68, so dark logos stay visible on navy.
+  Light mode: never lighter than 0.58, so yellow and cyan logos still read on white.
+  Black logos (adaptive) just use the text colour. Same rule as the Skills icons.
+*/
+.tech-chip {
+  --chip-ink: var(--chip-color, var(--accent-text));
+}
+
+@supports (color: oklch(from red l c h)) {
+  .tech-chip {
+    --chip-ink: oklch(from var(--chip-color, var(--accent-text)) max(l, 0.68) c h);
+  }
+
+  :root:not([data-theme="dark"]) .tech-chip {
+    --chip-ink: oklch(from var(--chip-color, var(--accent-text)) min(l, 0.58) c h);
+  }
+}
+
+:root .tech-chip.tech-chip--adaptive {
+  --chip-ink: var(--text);
+}
+
+.tech-chip svg {
+  flex: none;
+  color: var(--chip-ink);
+  font-size: 1rem;
+}
+
+/* The "+N" chip */
+.tech-chip--more {
+  padding-inline: 0.65rem;
+  color: var(--text-muted);
+  cursor: help;
+}
+
+/* size="lg": the larger chips of the project page's tech cards */
+.tech-chips--lg {
+  gap: 0.65rem;
+}
+
+.tech-chips--lg .tech-chip {
+  gap: 0.6rem;
+  padding: 0.5rem 1.05rem 0.5rem 0.85rem;
+  font-size: 0.95rem;
+}
+
+.tech-chips--lg .tech-chip svg {
+  font-size: 1.3rem;
+}
