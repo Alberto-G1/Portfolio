@@ -1,0 +1,64 @@
+/*
+  A 50px round button that, on hover or keyboard focus, grows into a pill: the arrow slides up out
+  of view and "Back to Top" slides in. Colours: navy button with a gold arrow (white in light mode),
+  gold with a navy label when expanded; the ring is the accent at 25%.
+*/
+.btt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  overflow: hidden;
+  font-weight: 600;
+  background-color: var(--brand-navy);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  transition-property: width, border-radius, background-color, box-shadow;
+}
+
+.btt-icon {
+  width: 12px;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.btt-icon path {
+  fill: var(--on-navy);
+}
+
+.btt:hover,
+.btt:focus-visible {
+  width: 140px;
+  background-color: var(--accent);
+  border-radius: 50px;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent),
+    var(--glow);
+}
+
+.btt:hover .btt-icon,
+.btt:focus-visible .btt-icon {
+  transform: translateY(-200%);
+}
+
+/* The label: zero-size until hover, then it takes its place in the middle */
+.btt::before {
+  content: "Back to Top";
+  position: absolute;
+  bottom: -20px;
+  color: var(--accent-contrast);
+  font-size: 0;
+}
+
+.btt:hover::before,
+.btt:focus-visible::before {
+  bottom: unset;
+  font-size: 13px;
+  opacity: 1;
+}

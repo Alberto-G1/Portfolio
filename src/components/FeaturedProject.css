@@ -1,0 +1,173 @@
+/* Wide card: text left (about 55%), cover right, border + outer glow in the project colour */
+.featured {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1.5px solid color-mix(in srgb, var(--project-color) 72%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--project-color) 18%, transparent),
+    0 0 44px color-mix(in srgb, var(--project-color) 30%, transparent),
+    var(--shadow);
+}
+
+/* Light mode: the same border, a lighter glow */
+:root:not([data-theme="dark"]) .featured {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--project-color) 12%, transparent),
+    0 8px 36px color-mix(in srgb, var(--project-color) 18%, transparent),
+    var(--shadow);
+}
+
+.featured-body {
+  /* not positioned: the title button's ::after must stretch over the whole card, not just this column */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.95rem;
+  padding: clamp(1.5rem, 2.6vw, 2.4rem);
+}
+
+/* The gold "Featured Project" pill */
+.featured-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.95rem 0.3rem 0.75rem;
+  color: var(--accent-contrast);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  background: var(--accent);
+  border-radius: 999px;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 34%, transparent);
+}
+
+.featured-title {
+  font-size: clamp(2rem, 1.1rem + 2.4vw, 3.3rem);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+/* The title is a real button that also makes the whole card clickable (::after stretches over it) */
+.featured-open {
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  background: none;
+  border: 0;
+}
+
+.featured-open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.featured-open:focus-visible {
+  outline: none;
+}
+
+.featured:has(.featured-open:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.featured-sub {
+  color: var(--heading);
+  font-size: clamp(1.02rem, 0.9rem + 0.4vw, 1.25rem);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.featured-desc {
+  max-width: 34rem;
+  color: var(--text-muted);
+  font-size: 0.98rem;
+}
+
+.featured .project-links {
+  margin-top: 0.35rem;
+}
+
+.featured .project-btn {
+  flex: 0 0 auto;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+/* ---------- The cover, faded into the card from its left edge ---------- */
+.featured-media {
+  position: relative;
+  min-height: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 42%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 42%);
+}
+
+/* In the wide layout the cover fills the panel, whatever height the text makes it */
+.featured-media .project-cover {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+/* The generated cover's initials sit in the upper part, clear of the heartbeat line across the middle */
+.featured-media .project-cover--art {
+  place-items: start center;
+  padding-top: clamp(1.25rem, 11%, 3.25rem);
+}
+
+/* Heartbeat line: hidden (offset 1) until the cover is seen, then drawn across once */
+.featured-heartbeat {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 34%;
+  overflow: visible;
+  transform: translateY(-50%);
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--project-color) 70%, transparent));
+}
+
+.featured-heartbeat path {
+  fill: none;
+  stroke: var(--project-color);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0.62;
+}
+
+.featured-media.is-drawn .featured-heartbeat path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2.6s cubic-bezier(0.4, 0.1, 0.3, 1);
+}
+
+/* ---------- Under 1024px: the cover goes on top, 16:10, faded into the card from its bottom edge ---------- */
+@media (max-width: 1023.98px) {
+  .featured {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .featured-media {
+    order: -1;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  }
+
+  .featured-body {
+    margin-top: -2rem;
+  }
+}

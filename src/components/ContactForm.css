@@ -1,0 +1,404 @@
+/* The form card. Its neon border (rotating blue + gold) and outer glow come from the shared .neon classes in Contact.css. */
+.cf-card {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border-radius: 2rem;
+}
+
+.cf-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+/* the large gold paper plane */
+.cf-header-icon {
+  flex: none;
+  color: var(--accent);
+  font-size: 3.1rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 55%, transparent));
+}
+
+/* a bold sans, white "Send a" + gold "Message" (not the serif of the section headings) */
+.cf-title {
+  font-family: var(--font-body);
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.cf-subtitle {
+  margin-top: 0.45rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.cf-bar {
+  display: block;
+  width: 3.25rem;
+  height: 4px;
+  margin-top: 0.9rem;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+/* ---------- Fields ---------- */
+.cf-form {
+  display: grid;
+  gap: 1.15rem;
+  margin-top: 1.9rem;
+}
+
+.cf-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+
+.cf-field {
+  min-width: 0;
+}
+
+.cf-control {
+  position: relative;
+}
+
+/* dark glass, thin blue border, an icon on the left; focus turns the border gold with a soft glow */
+.cf-input {
+  display: block;
+  width: 100%;
+  padding: 1.55rem 1rem 0.6rem 2.9rem;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.5;
+  background: color-mix(in srgb, var(--contact-blue) 14%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--contact-blue) 62%, transparent);
+  border-radius: 0.95rem;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background-color var(--transition);
+}
+
+.cf-input:hover {
+  border-color: color-mix(in srgb, var(--contact-blue) 85%, transparent);
+}
+
+.cf-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent),
+    0 0 20px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* Light mode: a white surface with a navy-tinted border */
+:root:not([data-theme="dark"]) .cf-input {
+  background: var(--surface-solid);
+  border-color: color-mix(in srgb, var(--brand-navy) 32%, transparent);
+}
+
+:root:not([data-theme="dark"]) .cf-input:hover {
+  border-color: color-mix(in srgb, var(--brand-navy) 55%, transparent);
+}
+
+:root:not([data-theme="dark"]) .cf-input:focus {
+  border-color: var(--accent);
+}
+
+.cf-textarea {
+  min-height: 9.5rem;
+  padding-top: 1.85rem;
+  padding-bottom: 1.9rem; /* room for the counter */
+  line-height: 1.6;
+  resize: vertical; /* vertical only */
+}
+
+.cf-icon {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.05rem;
+  z-index: 1;
+  color: var(--blue-ink);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: color var(--transition);
+}
+
+.cf-control:focus-within .cf-icon {
+  color: var(--accent-text);
+}
+
+/* The floating label: it starts where a placeholder would and moves up on focus or once there is text */
+.cf-label {
+  position: absolute;
+  top: 1.05rem;
+  left: 2.9rem;
+  max-width: calc(100% - 3.5rem);
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+  transform-origin: left top;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.cf-input:focus ~ .cf-label,
+.cf-input:not(:placeholder-shown) ~ .cf-label {
+  color: var(--accent-text);
+  transform: translateY(-0.62rem) scale(0.78);
+}
+
+.cf-field.has-error .cf-input {
+  border-color: var(--error-ink);
+}
+
+.cf-field.has-error .cf-input:focus {
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--contact-error) 22%, transparent),
+    0 0 18px color-mix(in srgb, var(--contact-error) 25%, transparent);
+}
+
+.cf-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+  color: var(--error-ink);
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.cf-error svg {
+  flex: none;
+  margin-top: 0.15em;
+}
+
+.cf-count {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.55rem;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.cf-count.is-over {
+  color: var(--error-ink);
+  font-weight: 700;
+}
+
+/* Honeypot: off-screen, not focusable, not announced. (Not display:none, which some bots skip.) */
+.cf-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- Status ---------- */
+.cf-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  background: color-mix(in srgb, var(--contact-error) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--contact-error) 50%, transparent);
+  border-radius: 0.9rem;
+}
+
+.cf-alert svg {
+  flex: none;
+  margin-top: 0.2em;
+  color: var(--error-ink);
+}
+
+.cf-alert a {
+  color: var(--accent-text);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.cf-notice {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Send button: a large solid gold pill ---------- */
+.cf-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.3rem;
+}
+
+.cf-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 1.05rem 2.2rem;
+  color: var(--accent-contrast);
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(180deg, var(--hover), var(--accent));
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 42%, transparent);
+  transition:
+    background-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.cf-send svg {
+  flex: none;
+  transition: transform var(--transition);
+}
+
+.cf-send:hover:not(:disabled) {
+  background: linear-gradient(180deg, var(--hover), var(--hover));
+  box-shadow: 0 0 36px color-mix(in srgb, var(--accent) 68%, transparent);
+  transform: translateY(-2px);
+}
+
+.cf-send:hover:not(:disabled) .cf-send-plane,
+.cf-send:hover:not(:disabled) .cf-send-chevron,
+.cf-send:focus-visible .cf-send-plane,
+.cf-send:focus-visible .cf-send-chevron {
+  transform: translateX(5px);
+}
+
+.cf-send:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.cf-send:disabled {
+  cursor: default;
+}
+
+.cf-send.is-sending {
+  cursor: progress;
+}
+
+/* "Message Sent!": green with a check */
+.cf-send.is-success {
+  background: var(--contact-ok);
+  box-shadow: 0 0 26px color-mix(in srgb, var(--contact-ok) 50%, transparent);
+}
+
+.cf-spinner {
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 2.5px solid color-mix(in srgb, var(--accent-contrast) 28%, transparent);
+  border-top-color: var(--accent-contrast);
+  border-radius: 50%;
+  animation: cf-spin 0.8s linear infinite;
+}
+
+@keyframes cf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Success panel ---------- */
+.cf-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1rem 1.5rem;
+  text-align: center;
+}
+
+.cf-success-icon {
+  color: var(--ok-ink);
+  font-size: 4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--contact-ok) 45%, transparent));
+}
+
+.cf-success-title {
+  margin-top: 1rem;
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.1rem);
+  font-weight: 800;
+}
+
+.cf-success-title:focus {
+  outline: none;
+}
+
+.cf-success p {
+  margin-top: 0.4rem;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.cf-again {
+  padding: 0.8rem 1.9rem;
+  margin-top: 1.5rem;
+  color: var(--heading);
+  font-weight: 800;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  transition:
+    background-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.cf-again:hover {
+  background: var(--accent-soft);
+  box-shadow: var(--glow);
+}
+
+.cf-again:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ---------- Under 640px ---------- */
+@media (max-width: 639.98px) {
+  .cf-header {
+    gap: 0.9rem;
+  }
+
+  .cf-header-icon {
+    font-size: 2.4rem;
+  }
+
+  .cf-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cf-actions {
+    justify-content: stretch;
+  }
+
+  .cf-send {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-send:hover:not(:disabled),
+  .cf-send:hover:not(:disabled) .cf-send-plane,
+  .cf-send:hover:not(:disabled) .cf-send-chevron,
+  .cf-send:focus-visible .cf-send-plane,
+  .cf-send:focus-visible .cf-send-chevron {
+    transform: none;
+  }
+}

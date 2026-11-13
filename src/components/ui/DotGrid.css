@@ -1,0 +1,13 @@
+.dot-grid {
+  position: absolute;
+  display: block;
+  width: 12rem;
+  height: 9rem;
+  color: var(--dot-color, var(--accent)); /* the dots; also the (alpha-only) mask colour */
+  background-image: radial-gradient(circle, currentColor 0 1.6px, transparent 2.2px);
+  background-size: 20px 20px;
+  opacity: 0.32;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse at center, currentColor 35%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, currentColor 35%, transparent 75%);
+}

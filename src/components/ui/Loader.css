@@ -1,0 +1,50 @@
+/*
+  Size: set --loader-size on the element or a parent (default 170px).
+  Colour: --loader-color (default: the theme accent).
+  Speed: the 6s below. Under prefers-reduced-motion the global rule stops the rotation.
+*/
+.loader {
+  display: grid;
+  place-items: center;
+}
+
+.loader-rings,
+.loader-rings div {
+  position: relative;
+  width: var(--loader-size, 170px);
+  height: var(--loader-size, 170px);
+  overflow: hidden;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  animation: loader-rotate 6s infinite linear;
+}
+
+.loader-rings div {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+}
+
+/* The top half of each ring (the gradient is drawn on a box twice as tall as the pseudo-element) */
+.loader-rings::before,
+.loader-rings div::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 50%;
+  background: radial-gradient(
+    transparent,
+    transparent 65%,
+    var(--loader-color, var(--accent)) 65%,
+    var(--loader-color, var(--accent))
+  );
+  background-size: 100% 200%;
+}
+
+@keyframes loader-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

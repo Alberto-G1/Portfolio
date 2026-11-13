@@ -1,0 +1,281 @@
+/* Fonts are loaded from Google Fonts in index.html. */
+:root {
+  --font-heading: "Playfair Display", "Lora", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/*
+  Space the floating navbar takes at the top of the page (its offset from the edge, its
+  height and a little breathing room); sections use it for scroll-margin-top. The navbar
+  switches to its compact "card" form below 1024px.
+*/
+:root {
+  --navbar-height: 6.5rem;
+}
+
+@media (max-width: 1023.98px) {
+  :root {
+    --navbar-height: 5.5rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keeps the layout from shifting when the mobile menu locks scrolling. */
+  scrollbar-gutter: stable;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Base */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* The big headings are the heavy, high-contrast serif look (Playfair Display 800). */
+h1,
+h2 {
+  font-weight: 800;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 5vw + 1rem, 3.75rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+}
+
+h3 {
+  font-size: 1.375rem;
+}
+
+/* Text uses --accent-text / --hover-text (readable on light backgrounds); see theme.css. */
+a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--hover-text);
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+}
+
+/* Headings must not hide under the fixed navbar when jumped to. */
+section[id] {
+  scroll-margin-top: var(--navbar-height);
+}
+
+/* Utilities */
+.accent {
+  color: var(--accent-text);
+}
+
+/* Hidden visually but still read by screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip-path: inset(50%);
+}
+
+/* Reveal on scroll: see src/hooks/useReveal.js. Stagger with --reveal-delay. */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.7s ease var(--reveal-delay, 0s),
+    transform 0.7s ease var(--reveal-delay, 0s);
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Buttons (also work on <a>). .btn is filled; add .btn-outline for the outlined style. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.35rem;
+  color: var(--accent-contrast);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+}
+
+.btn:hover {
+  color: var(--accent-contrast);
+  background: var(--hover);
+  border-color: var(--hover);
+}
+
+.btn-outline {
+  color: var(--accent-text);
+  background: transparent;
+  border-color: var(--accent-text);
+}
+
+.btn-outline:hover {
+  color: var(--hover-text);
+  background: var(--accent-soft);
+  border-color: var(--hover-text);
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/*
+  Smooth theme switching.
+
+  The colour variables are registered so they can be transitioned once, on
+  :root, and every element that uses them fades together. (A transition on
+  every element's own `color` is much slower to settle in Chrome.) Where
+  @property is unsupported the theme simply switches instantly.
+  initial-value is required by @property but never used: theme.css always
+  sets each variable on :root.
+*/
+@property --bg { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --bg-alt { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --surface { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --border { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --text { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --text-muted { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --heading { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --accent { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --accent-contrast { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --hover { syntax: "<color>"; inherits: true; initial-value: transparent; }
+/* Derived / mode-dependent colours: registered too, so they fade instead of snapping. */
+@property --surface-solid { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --brand-navy { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --on-navy { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --cta-bg { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --cta-text { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --accent-text { syntax: "<color>"; inherits: true; initial-value: transparent; }
+@property --hover-text { syntax: "<color>"; inherits: true; initial-value: transparent; }
+
+:root {
+  transition:
+    --bg var(--transition),
+    --bg-alt var(--transition),
+    --surface var(--transition),
+    --border var(--transition),
+    --text var(--transition),
+    --text-muted var(--transition),
+    --heading var(--transition),
+    --accent var(--transition),
+    --accent-contrast var(--transition),
+    --hover var(--transition),
+    --surface-solid var(--transition),
+    --brand-navy var(--transition),
+    --on-navy var(--transition),
+    --cta-bg var(--transition),
+    --cta-text var(--transition),
+    --accent-text var(--transition),
+    --hover-text var(--transition);
+}
+
+/*
+  Hover fades for interactive elements. A component that declares its own
+  `transition` replaces this one, so list these properties there too.
+*/
+a,
+button {
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* shown for an instant while a lazily loaded page (a project) is being fetched: keeps the footer from jumping up */
+.route-loading {
+  min-height: 100vh;
+}

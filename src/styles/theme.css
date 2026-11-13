@@ -1,0 +1,126 @@
+/*
+  Theme variables. Default palette: "Navy & Gold".
+
+  Light is the default (:root). Dark overrides the neutrals AND the three
+  customisable colours (--heading, --accent, --hover).
+
+  --heading / --accent / --hover are deliberately independent of the neutrals:
+  ThemeContext overrides them as inline styles on <html>, which beats these
+  rules. The defaults below must match PRESETS[0] ("Navy & Gold") in
+  src/context/themeConfig.js.
+
+  Everything else that is gold-coloured is DERIVED from --accent / --hover with
+  color-mix(), so the live customizer recolours it too.
+
+  Contrast: bright gold is only ~2:1 on a light page, so it is used for fills,
+  glows and icons only. Anything that is TEXT uses --accent-text / --hover-text,
+  which in light mode are darkened to stay above 4.5:1 (see the bottom of this file).
+*/
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces. --surface is translucent (glass); use --surface-solid where
+     content must not show through (floating panels, buttons). */
+  --bg: #f5f6fb;
+  --bg-alt: #eceef7;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-solid: #ffffff;
+  --border: rgba(16, 26, 72, 0.08);
+
+  /* Text */
+  --text: #1a2348;
+  --text-muted: #5a6385;
+
+  /* Customisable colours */
+  --heading: #0f1a45;
+  --accent: #e09b00;
+  --accent-contrast: #0b1220; /* text/icons on a --accent fill */
+  --hover: #ffb800;
+
+  /* Brand navy, and what to draw on top of it */
+  --brand-navy: #13204a;
+  --on-navy: #ffffff;
+
+  /* "Let's Talk" button: navy with white text in light mode */
+  --cta-bg: var(--brand-navy);
+  --cta-text: var(--on-navy);
+  --cta-shadow:
+    0 8px 22px -6px color-mix(in srgb, var(--brand-navy) 45%, transparent),
+    0 0 20px color-mix(in srgb, var(--accent) 28%, transparent);
+
+  /* Misc */
+  --shadow: 0 1px 2px rgba(16, 26, 72, 0.06), 0 10px 30px rgba(16, 26, 72, 0.1);
+  --radius: 10px;
+  --transition: 0.25s ease;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0a1128;
+  --bg-alt: #0e1733;
+  --surface: rgba(16, 26, 56, 0.72);
+  --surface-solid: #101a38;
+  --border: rgba(255, 255, 255, 0.08);
+
+  --text: #e8ecf7;
+  --text-muted: #9aa3bf;
+
+  --heading: #ffffff;
+  --accent: #ffb800;
+  --accent-contrast: #0b1220;
+  --hover: #ffc93c;
+
+  /* Gold icons on navy */
+  --on-navy: var(--accent);
+
+  /* "Let's Talk" button: gold with navy text and a gold glow in dark mode */
+  --cta-bg: var(--accent);
+  --cta-text: var(--accent-contrast);
+  --cta-shadow: 0 0 24px color-mix(in srgb, var(--accent) 45%, transparent);
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Derived from the accent, so they follow the customizer. Same in both modes. */
+:root {
+  --accent-soft: color-mix(in srgb, var(--accent) 15%, transparent); /* active / hover pills */
+  --glow: 0 0 24px color-mix(in srgb, var(--accent) 45%, transparent);
+
+  /* Accent / hover when used as TEXT. Dark mode: as picked. Light mode: darkened (below). */
+  --accent-text: var(--accent);
+  --hover-text: var(--hover);
+
+  /* A rich DARK shade of the accent for fills that carry white text (the customizer's header, pills and button).
+     Fixed OKLCH lightness 0.4 keeps white on top above 8:1 for every accent; hue and most of the chroma are kept,
+     so it follows the preset. The first value is the fallback for browsers without relative colour syntax. */
+  --accent-deep: color-mix(in srgb, var(--accent) 45%, #000);
+}
+
+@supports (color: oklch(from red l c h)) {
+  :root {
+    --accent-deep: oklch(from var(--accent) 0.4 calc(c * 0.75) h);
+  }
+}
+
+/*
+  Light mode only. Cap the OKLCH lightness so the colour stays readable on the light
+  backgrounds (--bg, --bg-alt, cards and the soft pill), keeping hue and chroma, so a custom
+  accent stays "its" colour. Colours already dark enough (e.g. the blue presets) are left
+  alone. Swept over 437 accents (every hue, several lightness/chroma levels, greys): the
+  worst case is 4.79:1 for accent text and 5.4:1 for hover text; a 0.5 cap was not enough
+  (pure green fell to 4.22:1). The first rule is the fallback for browsers without relative
+  colour syntax.
+*/
+:root:not([data-theme="dark"]) {
+  --accent-text: color-mix(in srgb, var(--accent) 55%, #000);
+  --hover-text: color-mix(in srgb, var(--hover) 45%, #000);
+}
+
+@supports (color: oklch(from red l c h)) {
+  :root:not([data-theme="dark"]) {
+    --accent-text: oklch(from var(--accent) min(l, 0.47) c h);
+    --hover-text: oklch(from var(--hover) min(l, 0.43) c h);
+  }
+}

@@ -1,0 +1,27 @@
+.swoosh {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: min(46vw, 38rem);
+  height: min(17vw, 14rem);
+  overflow: visible;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.swoosh--left {
+  left: 0;
+}
+
+/* The right one is the same shape mirrored, hugging the bottom-right corner */
+.swoosh--right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.swoosh-line {
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 70%, transparent));
+}

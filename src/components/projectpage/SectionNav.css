@@ -1,0 +1,106 @@
+/* Sticks just under the floating navbar. (It needs no ancestor with overflow hidden/auto: the page uses overflow-x: clip.) */
+.psn {
+  position: sticky;
+  top: calc(var(--navbar-height) - 0.6rem);
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  pointer-events: none; /* only the bar itself takes clicks, the empty sides stay clickable */
+}
+
+.psn-bar {
+  max-width: 100%;
+  padding: 0.4rem;
+  pointer-events: auto;
+  background: color-mix(in srgb, var(--surface-solid) 78%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius: 999px;
+  box-shadow:
+    0 10px 26px -14px color-mix(in srgb, var(--accent) 45%, transparent),
+    var(--shadow);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+}
+
+/* wide: all links visible; narrow: scrolls sideways with no visible scrollbar */
+.psn-track {
+  position: relative;
+  overflow-x: auto;
+  border-radius: 999px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.psn-track::-webkit-scrollbar {
+  display: none;
+}
+
+.psn-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.15rem;
+  padding: 0;
+  list-style: none;
+}
+
+.psn-link {
+  display: block;
+  padding: 0.55rem 1.1rem;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 999px;
+  transition: color var(--transition);
+}
+
+.psn-link:hover {
+  color: var(--accent-text);
+}
+
+.psn-link.is-active {
+  color: var(--accent-text);
+}
+
+.psn-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* the gold pill that slides under the current link */
+.psn-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--ind-w, 0);
+  height: var(--ind-h, 0);
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 999px;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 22%, transparent);
+  opacity: 0;
+  transform: translate(var(--ind-x, 0), var(--ind-y, 0));
+}
+
+.psn-indicator[data-on] {
+  opacity: 1;
+}
+
+.psn-indicator[data-anim] {
+  transition:
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.35s ease,
+    opacity 0.2s ease;
+}
+
+@media (max-width: 1023.98px) {
+  .psn {
+    top: calc(var(--navbar-height) - 0.8rem);
+    padding-inline: 0.75rem;
+  }
+}
