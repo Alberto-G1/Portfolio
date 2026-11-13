@@ -1,0 +1,84 @@
+.section-heading {
+  margin-bottom: 2rem;
+}
+
+.section-heading--center {
+  text-align: center;
+}
+
+/* Label row: gold-outlined pill, then a thin gold line fading away to the right */
+.section-heading-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.section-heading--center .section-heading-row {
+  justify-content: center;
+}
+
+.section-heading-label {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 1.5rem 0.55rem 1.1rem;
+  color: var(--accent-text);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.2;
+  background: color-mix(in srgb, var(--surface-solid) 45%, transparent);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.section-heading-label svg {
+  flex: none;
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+.section-heading-line {
+  flex: 0 1 11rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+/* In a centred heading the line also runs to the left of the pill, fading toward its outer end */
+.section-heading-line--before {
+  background: linear-gradient(270deg, var(--accent), transparent);
+}
+
+/* Very large, heavy serif (800) */
+.section-heading-title {
+  font-size: clamp(2.9rem, 1rem + 5.6vw, 5.75rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+
+/* Optional subtitle: a smaller serif line under the title */
+.section-heading-subtitle {
+  margin-top: 0.35rem;
+  color: var(--heading);
+  font-family: var(--font-heading);
+  font-size: clamp(1.55rem, 1rem + 2.2vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+@media (max-width: 767.98px) {
+  .section-heading-row {
+    gap: 0.9rem;
+  }
+
+  .section-heading-label {
+    font-size: 0.95rem;
+  }
+
+  .section-heading-line {
+    flex-basis: 4rem;
+  }
+}

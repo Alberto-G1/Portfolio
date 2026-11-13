@@ -1,0 +1,126 @@
+/*
+  Neon borders, shared by the Contact section (info cards, form card, Follow Me bar) and the project pages (CTA banner).
+  They need --contact-blue on an ancestor (set from `contactColors` in data/site.js); the gold half is the theme accent.
+*/
+/* ----------
+   A ring of blue + gold drawn by ::before and masked down to just the border, plus a blue/gold glow outside.
+   .neon--spin turns the gradient slowly round the card (conic-gradient, the angle is an animated custom property);
+   under reduced motion it simply stops. */
+@property --neon-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.glass-card.neon,
+.neon {
+  --neon-width: 1.5px;
+  position: relative;
+  border: 0;
+  box-shadow:
+    -12px 0 36px -16px color-mix(in srgb, var(--contact-blue) 55%, transparent),
+    12px 0 36px -16px color-mix(in srgb, var(--accent) 45%, transparent),
+    var(--shadow);
+}
+
+:root:not([data-theme="dark"]) .glass-card.neon,
+:root:not([data-theme="dark"]) .neon {
+  box-shadow:
+    -10px 4px 30px -18px color-mix(in srgb, var(--contact-blue) 35%, transparent),
+    10px 4px 30px -18px color-mix(in srgb, var(--accent) 30%, transparent),
+    var(--shadow);
+}
+
+.neon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: var(--neon-width);
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--contact-blue),
+    color-mix(in srgb, var(--accent) 80%, var(--contact-blue)) 52%,
+    var(--contact-blue)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.neon--spin {
+  --neon-width: 3px;
+}
+
+/* The glow round the form card. The ring itself can't be blurred (CSS masks come after filters), so this is a
+   separate conic gradient, turning in step with it, blurred and sitting behind the card. */
+.neon-glow {
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  border-radius: 2.4rem;
+  background: conic-gradient(
+    from var(--neon-angle),
+    var(--contact-blue),
+    var(--accent),
+    var(--contact-blue) 40%,
+    var(--accent) 70%,
+    var(--contact-blue)
+  );
+  filter: blur(22px);
+  opacity: 0.5;
+  animation: neon-spin 7s linear infinite;
+  pointer-events: none;
+}
+
+:root:not([data-theme="dark"]) .neon-glow {
+  opacity: 0.26;
+}
+
+/* the form card glows harder: blue and gold halos round it, and a soft inner glow along its edge */
+.glass-card.neon--spin {
+  box-shadow:
+    0 0 34px -2px color-mix(in srgb, var(--contact-blue) 62%, transparent),
+    0 0 60px -12px color-mix(in srgb, var(--accent) 55%, transparent),
+    inset 0 0 28px -10px color-mix(in srgb, var(--contact-blue) 55%, transparent),
+    var(--shadow);
+}
+
+:root:not([data-theme="dark"]) .glass-card.neon--spin {
+  box-shadow:
+    0 6px 34px -10px color-mix(in srgb, var(--contact-blue) 38%, transparent),
+    0 6px 50px -16px color-mix(in srgb, var(--accent) 32%, transparent),
+    var(--shadow);
+}
+
+.neon--spin::before {
+  background: conic-gradient(
+    from var(--neon-angle),
+    var(--contact-blue),
+    var(--accent),
+    var(--contact-blue) 40%,
+    var(--accent) 70%,
+    var(--contact-blue)
+  );
+  animation: neon-spin 7s linear infinite;
+}
+
+@keyframes neon-spin {
+  to {
+    --neon-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-glow,
+  .neon--spin::before {
+    animation: none;
+  }
+}

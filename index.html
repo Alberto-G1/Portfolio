@@ -1,952 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nuwarinda Albert - Computer Scientist and Software Developer">
-    <meta name="keywords" content="computer science, software development, web development, app development, portfolio, Nuwarinda Albert">
-    <title>Nuwarinda Albert | Computer Scientist</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Favicon - Circular -->
-    <link rel="icon" href="images/profile/circular-favicon.png" type="image/svg+xml">
-    <link rel="icon" href="images/profile/circular-favicon.png" type="image/jpeg">
-    <link rel="apple-touch-icon" href="images/profile/circular-favicon.png">
-    
-    <script src="scripts.js"></script>
-</head>
-<body class="light-mode">
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-progress-bar"></div>
-    
-    <div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuwarinda Albert | Computer Scientist • Software Developer</title>
+    <meta name="description" content="Portfolio of Nuwarinda Albert, a computer scientist and software developer in Kampala, Uganda: projects, skills, experience and how to get in touch." />
+    <meta name="author" content="Nuwarinda Albert" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="%SITE_URL%/" />
+    <meta name="theme-color" content="#13204a" />
 
-        
+    <!-- Link previews (WhatsApp, Facebook, LinkedIn, Slack, Telegram...): the image is public/og-image.jpg, 1200x630.
+         %SITE_URL% is filled in at build time from src/data/siteUrl.js; the image address must be absolute. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nuwarinda Albert" />
+    <meta property="og:title" content="Nuwarinda Albert | Computer Scientist • Software Developer" />
+    <meta property="og:description" content="Portfolio of Nuwarinda Albert, a computer scientist and software developer in Kampala, Uganda: projects, skills, experience and how to get in touch." />
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta property="og:image" content="%SITE_URL%/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nuwarinda Albert, computer scientist and software developer, in Kampala, Uganda" />
+    <meta property="og:locale" content="en_US" />
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <img src="images/profile/prof.jpg" alt="Nuwarinda Albert Logo" class="logo">
-                <h3 class="sidebar-name">Nuwarinda Albert</h3>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About Me</a></li>
-                <li><a href="#education" class="nav-link"><i class="fas fa-user-graduate"></i> Education</a></li>
-                <li><a href="#services" class="nav-link"><i class="fas fa-briefcase"></i> Services</a></li>
-                <li><a href="#portfolio" class="nav-link"><i class="fas fa-folder"></i> Portfolio</a></li>
-                <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
-            </ul>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/albert-nuwarinda-129841351/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Alberto-G1" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="pages/coming-soon.html"><i class="fab fa-twitter"></i></a>
-                <a href="pages/coming-soon.html"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-        
-        <button class="toggle-menu">
-            <i class="fas fa-bars"></i>
-        </button>
+    <!-- X (Twitter) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nuwarinda Albert | Computer Scientist • Software Developer" />
+    <meta name="twitter:description" content="Portfolio of Nuwarinda Albert, a computer scientist and software developer in Kampala, Uganda: projects, skills, experience and how to get in touch." />
+    <meta name="twitter:image" content="%SITE_URL%/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Nuwarinda Albert, computer scientist and software developer, in Kampala, Uganda" />
 
-        <!-- Main Content -->
-        <main class="content">
-            <!-- Theme Toggle Button -->
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
-                <i class="fas fa-sun light-icon"></i>
-                <i class="fas fa-moon dark-icon"></i>
-            </button>
-
-            <!-- Home Section -->
-            <section id="home" class="section">
-                <div class="home-info">
-                    <div class="details">
-                        <span class="greeting">Hello, I'm</span>
-                        <h1>Nuwarinda<span class="highlight"> Albert</span></h1>
-                        <h2>I am a <span class="changing-text">Computer Scientist</span></h2>
-                        <p class="intro-text">I am a motivated and detail-oriented Computer Science student at Makerere University with hands-on experience in software development and system design. Skilled in modern technologies including Java, Python, Django, Spring Boot, Hibernate, Flutter, and MySQL.</p>
-                        <div class="home-buttons">
-                            <button class="primary-btn" onclick="showContact()">Hire me</button>
-                            <button class="secondary-btn" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">Learn more</button>
-                        </div>
-                    </div>
-                    <div class="profile-pic">
-                        <div class="profile-frame">
-                            <img src="images/logo/logo1.jpeg" alt="Nuwarinda Albert Portrait">
-                        </div>
-                    </div>
-                </div>
-                <div class="scroll-down">
-                    <a href="#about">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>Scroll Down</span>
-                    </a>
-                </div>
-            </section>
-
-            <!-- About Section -->
-            <section id="about" class="section">
-                <div class="section-header">
-                    <h2>About Me</h2>
-                    <span class="section-subtitle">My Introduction</span>
-                </div>
-                
-                <div class="about-container">
-                    <div class="about-img">
-                        <img src="images/profile/albert.jpeg" alt="About Me Image">
-                        <div class="experience-badge">
-                            <span>3+</span>
-                            <span>Years</span>
-                        </div>
-                    </div>
-                    
-                    <div class="about-info">
-                        <h3>I'm a passionate <span class="highlight">Computer Scientist</span> based in Kampala, Uganda</h3>
-                        
-                        <p class="about-description">
-                            Motivated and detail-oriented Computer Science student at Makerere University (Year 3) with hands-on experience in software development and system design. Strong problem-solver, effective communicator, and collaborative team player. Recently completed an internship at Pahappa Ltd, gaining industry experience in enterprise systems development.
-                        </p>
-                        
-                        <div class="about-details">
-                            <div class="about-detail-item">
-                                <i class="fas fa-phone"></i>
-                                <span>Phone: +256 763 085 855</span>
-                            </div>
-                            
-                            <div class="about-detail-item">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span>Degree: Bachelor of Science in Computer Science</span>
-                            </div>
-                            
-                            <div class="about-detail-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>Email: nuwarindaalbertgrande@gmail.com</span>
-                            </div>
-                            
-                            <div class="about-detail-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Location: Kampala, Uganda</span>
-                            </div>
-                            
-                            <div class="about-detail-item">
-                                <i class="fas fa-globe"></i>
-                                <span>Website: nuwarindaalbertgrandeportfolio.vercel.app </span>
-                            </div>
-                            
-                            <div class="about-detail-item">
-                                <i class="fas fa-briefcase"></i>
-                                <span>Freelance: Available</span>
-                            </div>
-                        </div>
-                        
-                        <a href="#" id="download-cv-btn" class="resume-btn">
-                            Download Resume
-                            <i class="fas fa-download"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Skills Section -->
-                <div class="skills-container">
-                    <h3 class="skills-title">My Skills</h3>
-                    
-                    <div class="skills-content">
-                        <div class="skills-group">
-                            <h4>Programming Languages</h4>
-                            <div class="skills-list">
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fab fa-python skill-icon"></i>
-                                        Python
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-python" style="width: 85%"></div>
-                                        <span class="skill-percentage-text">85%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fab fa-java skill-icon"></i>
-                                        Java
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-java" style="width: 80%"></div>
-                                        <span class="skill-percentage-text">80%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fab fa-js-square skill-icon"></i>
-                                        JavaScript
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-js" style="width: 75%"></div>
-                                        <span class="skill-percentage-text">75%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fas fa-code skill-icon"></i>
-                                        C++
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-cpp" style="width: 70%"></div>
-                                        <span class="skill-percentage-text">70%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fas fa-database skill-icon"></i>
-                                        SQL
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-sql" style="width: 85%"></div>
-                                        <span class="skill-percentage-text">85%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fas fa-mobile skill-icon"></i>
-                                        Dart
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-dart" style="width: 70%"></div>
-                                        <span class="skill-percentage-text">70%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="skills-group">
-                            <h4>Frameworks & Tools</h4>
-                            <div class="skills-list">
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fab fa-spring skill-icon"></i>
-                                        Spring Boot
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-spring" style="width: 80%"></div>
-                                        <span class="skill-percentage-text">80%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fab fa-python skill-icon"></i>
-                                        Django
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-django" style="width: 85%"></div>
-                                        <span class="skill-percentage-text">85%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fas fa-flask skill-icon"></i>
-                                        Flask
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-flask" style="width: 75%"></div>
-                                        <span class="skill-percentage-text">75%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fab fa-android skill-icon"></i>
-                                        Flutter
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-flutter" style="width: 75%"></div>
-                                        <span class="skill-percentage-text">75%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fas fa-brain skill-icon"></i>
-                                        PyTorch
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-pytorch" style="width: 70%"></div>
-                                        <span class="skill-percentage-text">70%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fas fa-camera skill-icon"></i>
-                                        OpenCV
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-opencv" style="width: 70%"></div>
-                                        <span class="skill-percentage-text">70%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fas fa-fire skill-icon"></i>
-                                        Firebase
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-firebase" style="width: 75%"></div>
-                                        <span class="skill-percentage-text">75%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skill-item">
-                                    <div class="skill-name">
-                                        <i class="fab fa-git-alt skill-icon"></i>
-                                        Git/GitHub
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-percentage skill-git" style="width: 85%"></div>
-                                        <span class="skill-percentage-text">85%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Alternative Skills Display (Grid Style) -->
-                    <div class="skills-grid">
-                        <div class="skill-card">
-                            <i class="fab fa-python"></i>
-                            <h4>Python</h4>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <i class="fab fa-java"></i>
-                            <h4>Java</h4>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <i class="fab fa-js-square"></i>
-                            <h4>JavaScript</h4>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <i class="fas fa-code"></i>
-                            <h4>C++</h4>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <i class="fas fa-database"></i>
-                            <h4>SQL</h4>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <i class="fas fa-mobile"></i>
-                            <h4>Dart</h4>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <i class="fab fa-spring"></i>
-                            <h4>Spring Boot</h4>
-                        </div>
-                        
-                        <div class="skill-card">
-                            <i class="fab fa-python"></i>
-                            <h4>Django</h4>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Languages Section -->
-                <div class="languages-container">
-                    <h3 class="languages-title">Languages</h3>
-                    <div class="languages-list">
-                        <div class="language-item">
-                            <span class="language-name">English</span>
-                            <div class="language-proficiency">
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                            </div>
-                        </div>
-                        <div class="language-item">
-                            <span class="language-name">Luganda</span>
-                            <div class="language-proficiency">
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot"></div>
-                            </div>
-                        </div>
-                        <div class="language-item">
-                            <span class="language-name">Runyankore</span>
-                            <div class="language-proficiency">
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot active"></div>
-                                <div class="proficiency-dot"></div>
-                                <div class="proficiency-dot"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Education Section -->
-            <section id="education" class="section education-section">
-                <div class="section-header">
-                    <h2>My <span class="highlight">Education</span></h2>
-                    <p class="section-subtitle">Academic Background</p>
-                </div>
-                
-                <div class="education-timeline">
-                    <!-- Education Item 1 -->
-                    <div class="education-item">
-                        <div class="education-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="education-content">
-                            <span class="education-date">Aug 2023 – Jun 2027</span>
-                            <h3 class="education-title">Bachelor of Science in Computer Science</h3>
-                            <h4 class="education-school">Makerere University</h4>
-                            <p class="education-description">Currently in my third year of studies, focusing on software development, system design, and modern programming technologies.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Education Item 2 -->
-                    <div class="education-item">
-                        <div class="education-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="education-content">
-                            <span class="education-date">Jan 2020 – Sep 2022</span>
-                            <h3 class="education-title">Uganda Advanced Certificate of Education (UACE)</h3>
-                            <h4 class="education-school">Gombe Secondary School</h4>
-                            <p class="education-description">Completed advanced level education with a focus on sciences and mathematics.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Education Item 3 -->
-                    <div class="education-item">
-                        <div class="education-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="education-content">
-                            <span class="education-date">2016 – 2019</span>
-                            <h3 class="education-title">Uganda Certificate of Education (UCE)</h3>
-                            <h4 class="education-school">Wits College Namulanda</h4>
-                            <p class="education-description">Completed ordinary level education with excellent results in sciences and technology subjects.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Work Experience Section -->
-                <div class="section-header" style="margin-top: 50px;">
-                    <h2>My <span class="highlight">Work Experience</span></h2>
-                    <p class="section-subtitle">Professional Journey</p>
-                </div>
-                
-                <div class="education-timeline">
-                    <!-- Work Item 1 -->
-                    <div class="education-item">
-                        <div class="education-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <div class="education-content">
-                            <span class="education-date">Jun 2025 – Aug 2025</span>
-                            <h3 class="education-title">Software Development Intern</h3>
-                            <h4 class="education-school">Pahappa Ltd</h4>
-                            <p class="education-description">
-                                • Developed MedCare, an admin bootstrap Hospital Management System during internship.<br>
-                                • Contributed to the development of the Pahappa Goals Bucket (PGB) System, a KPI tracking and performance management platform.<br>
-                                • Worked with Java, Spring Boot, Hibernate, JSF (PrimeFaces), and MySQL in a full-stack environment.<br>
-                                • Implemented features such as authentication, role-based access, dashboards, and performance reviews.<br>
-                                • Collaborated with senior developers and project managers in an Agile workflow, using GitHub for version control.<br>
-                                • Gained practical experience in enterprise system development, testing, and deployment.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Services Section -->
-            <section id="services" class="section services-section">
-                <div class="section-header">
-                    <h2>My <span class="highlight">Services</span></h2>
-                    <p class="section-subtitle">What I Offer</p>
-                </div>
-                
-                <div class="service-cards">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3>Web Development</h3>
-                        <p class="service-description">Creating responsive, modern websites optimized for performance and user experience using Django, Flask, and modern frontend technologies.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>App Development</h3>
-                        <p class="service-description">Building cross-platform mobile applications using Flutter and Dart that deliver exceptional user experiences.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <h3>Database Design</h3>
-                        <p class="service-description">Designing and implementing efficient database systems using MySQL, PostgreSQL, and SQLite for optimal data management.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3>AI Solutions</h3>
-                        <p class="service-description">Developing machine learning models and AI solutions using Python, PyTorch, and OpenCV for various applications.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-server"></i>
-                        </div>
-                        <h3>Backend Development</h3>
-                        <p class="service-description">Building robust backend systems and APIs using Java, Spring Boot, Hibernate, and other enterprise technologies.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3>System Design</h3>
-                        <p class="service-description">Designing and architecting software systems with a focus on scalability, maintainability, and performance.</p>
-                        <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Portfolio Section -->
-            <section id="portfolio" class="section portfolio-section">
-                <div class="section-header">
-                    <h2>My <span class="highlight">Portfolio</span></h2>
-                    <p class="section-subtitle">Recent Projects</p>
-                </div>
-                
-                <div class="portfolio-filter">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="web">Web</button>
-                    <button class="filter-btn" data-filter="app">App</button>
-                    <button class="filter-btn" data-filter="ai">AI</button>
-                    <button class="filter-btn" data-filter="system">Systems</button>
-                </div>
-                
-                <div class="portfolio-cards">
-                    <!-- Portfolio Card 1 - CornerShop -->
-                    <div class="portfolio-card" data-category="web" onclick="window.location.href='pages/cornershop.html'">
-                        <div class="portfolio-img">
-                            <img src="images/projects/CornerShop/Home-page.png" alt="CornerShop E-Commerce">
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h4>CornerShop - Multi-Vendor E-Commerce</h4>
-                            <p>Django-based marketplace connecting local businesses with customers, featuring multi-vendor support and real-time inventory management.</p>
-                            <button class="view-more-btn">View Details</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Portfolio Card 2 -->
-                    <div class="portfolio-card" data-category="ai" onclick="window.location.href='pages/coming-soon.html'">
-                        <div class="portfolio-img">
-                            <img src="images/project/coffee-ai.jpg" alt="Coffee Bean AI">
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h4>Coffee Bean Quality Estimation Using AI</h4>
-                            <p>Machine learning model using Vision Transformers and CNNs for coffee bean classification.</p>
-                            <button class="view-more-btn">View Details</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Portfolio Card 3 -->
-                    <div class="portfolio-card" data-category="system" onclick="window.location.href='pages/coming-soon.html'">
-                        <div class="portfolio-img">
-                            <img src="images/project/library.jpg" alt="Library Management System">
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h4>Library Management System</h4>
-                            <p>Database-driven system for managing books and student records.</p>
-                            <button class="view-more-btn">View Details</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Portfolio Card 4 -->
-                    <div class="portfolio-card" data-category="app" onclick="window.location.href='pages/glamazon.html'">
-                        <div class="portfolio-img">
-                            <img src="images/projects/glamazon(salon-app)/landing-page.jpg" alt="Glamazon App">
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h4>Glamazon Application</h4>
-                            <p>Android app for salon booking and management with role-based access.</p>
-                            <button class="view-more-btn">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Portfolio Card 7 - JobQuest -->
-                    <div class="portfolio-card" data-category="app" onclick="window.location.href='pages/jobquest.html'">
-                        <div class="portfolio-img">
-                            <img src="images/projects/jobquest-app/welcome-page.jpg" alt="JobQuest App">
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h4>JobQuest Application</h4>
-                            <p>Job search and recruitment platform connecting job seekers with employers.</p>
-                            <button class="view-more-btn">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Portfolio Card 8 - Veloce -->
-                    <div class="portfolio-card" data-category="app" onclick="window.location.href='pages/veloce.html'">
-                        <div class="portfolio-img">
-                            <img src="images/projects/veloce(bike-app)/dashboard.jpg" alt="Veloce Bike App">
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h4>Veloce Bike App</h4>
-                            <p>Smart bike rental system with QR code scanning and real-time tracking.</p>
-                            <button class="view-more-btn">View Details</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Portfolio Card 5 -->
-                    <div class="portfolio-card" data-category="system" onclick="window.location.href='pages/coming-soon.html'">
-                        <div class="portfolio-img">
-                            <img src="images/project/pgb.jpg" alt="Pahappa Goals Bucket">
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h4>Pahappa Goals Bucket (PGB) System</h4>
-                            <p>KPI tracking system for goal setting and performance reviews.</p>
-                            <button class="view-more-btn">View Details</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Portfolio Card 6 -->
-                    <div class="portfolio-card" data-category="system" onclick="window.location.href='pages/coming-soon.html'">
-                        <div class="portfolio-img">
-                            <img src="images/project/medcare.jpg" alt="MedCare HMS">
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h4>MedCare HMS</h4>
-                            <p>Hospital management system with medical records and billing features.</p>
-                            <button class="view-more-btn">View Details</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project Details Modal -->
-                <div id="project-details" class="project-details-modal">
-                    <div class="modal-content">
-                        <span class="close-btn" onclick="hideProjectDetails()">&times;</span>
-                        <h3 id="modal-project-name">Project Name</h3>
-                        
-                        <div class="project-info">
-                            <div class="project-images" id="modal-project-images">
-                                <!-- Images will be dynamically inserted here -->
-                            </div>
-                            
-                            <div class="project-description">
-                                <p id="modal-project-description">Detailed description of the project goes here...</p>
-                                
-                                <div class="project-details-list">
-                                    <div class="detail-item">
-                                        <h4>Technologies:</h4>
-                                        <p id="modal-project-tech">HTML, CSS, JavaScript</p>
-                                    </div>
-                                    <div class="detail-item">
-                                        <h4>Date:</h4>
-                                        <p id="modal-project-date">January 2023</p>
-                                    </div>
-                                    <div class="detail-item">
-                                        <h4>Category:</h4>
-                                        <p id="modal-project-category">Web Development</p>
-                                    </div>
-                                </div>
-                                
-                                <a href="#" id="modal-project-link" class="primary-btn" target="_blank">View Project</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-overlay" onclick="hideProjectDetails()"></div>
-            </section>
-
-            <!-- Contact Section -->
-            <section id="contact" class="section contact-section">
-                <div class="section-header">
-                    <h2>Contact <span class="highlight">Me</span></h2>
-                    <p class="section-subtitle">Get In Touch</p>
-                </div>
-                
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <h3>Let's talk about your project</h3>
-                        <p>Feel free to reach out if you have any questions or want to work together. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
-                        
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div class="contact-text">
-                                    <h4>Call Me</h4>
-                                    <p>+256 763 085 855</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="contact-text">
-                                    <h4>Email</h4>
-                                    <p>nuwarindaalbertgrande@gmail.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="contact-text">
-                                    <h4>Location</h4>
-                                    <p>Kampala, Uganda</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-globe"></i>
-                                </div>
-                                <div class="contact-text">
-                                    <h4>Website</h4>
-                                    <p>nuwarindaalbertgrandeportfolio.vercel.app</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="social-links-contact">
-                            <a href="https://www.linkedin.com/in/albert-nuwarinda-129841351/" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="pages/coming-soon.html" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="https://github.com/Alberto-G1" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                            <a href="pages/coming-soon.html" class="social-link"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-form-container">
-                        <form id="contact-form" class="contact-form">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="submit-btn">
-                                <span>Send Message</span>
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Back to Top Button -->
-            <a href="#home" class="back-to-top" aria-label="Back to top">
-                <i class="fas fa-arrow-up"></i>
-            </a>
-        </main>
-    </div>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="images/logo/logo.jpeg" alt="Nuwarinda Albert Logo">
-                <h3>Nuwarinda Albert</h3>
-            </div>
-            
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-services">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#services">Web Development</a></li>
-                    <li><a href="#services">App Development</a></li>
-                    <li><a href="#services">Database Design</a></li>
-                    <li><a href="#services">AI Solutions</a></li>
-                    <li><a href="#services">Backend Development</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-contact">
-                <h4>Contact Info</h4>
-                <p><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</p>
-                <p><i class="fas fa-phone"></i> +256 763 085 855</p>
-                <p><i class="fas fa-envelope"></i> nuwarindaalbertgrande@gmail.com</p>
-                <p><i class="fas fa-globe"></i> www.excellentwebsite.com</p>
-                <div class="footer-social">
-                    <a href="https://www.linkedin.com/in/albert-nuwarinda-129841351/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="pages/coming-soon.html"><i class="fab fa-twitter"></i></a>
-                    <a href="https://github.com/Alberto-G1" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="pages/coming-soon.html"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2023 Nuwarinda Albert. All Rights Reserved.</p>
-            <p>Designed with <i class="fas fa-heart"></i> by Nuwarinda Albert</p>
-        </div>
-    </footer>
-
-    <script>
-        // Project details data
-        const projects = {
-            project1: {
-                name: "E-commerce Website Prototype",
-                description: "Built a functional e-commerce prototype with authentication, product catalog, and shopping cart. This project demonstrates full-stack development skills with a focus on user experience and secure transaction processing.",
-                tech: "HTML, CSS, JavaScript, Django",
-                date: "2023",
-                category: "Web Development",
-                link: "#"
-            },
-            project2: {
-                name: "Coffee Bean Quality Estimation Using AI",
-                description: "Developed a machine learning model using Vision Transformers and CNNs for coffee bean classification. Applied knowledge distillation and sparse learning techniques to optimize the model for mobile deployment.",
-                tech: "Python, PyTorch, OpenCV",
-                date: "2023",
-                category: "AI/ML",
-                link: "#"
-            },
-            project3: {
-                name: "Library Management System",
-                description: "Designed and implemented a database-driven system for managing books and student records. The system includes features for book tracking, borrower management, and reporting.",
-                tech: "MySQL",
-                date: "2022",
-                category: "Database Systems",
-                link: "#"
-            },
-            project4: {
-                name: "Glamazon Application",
-                description: "Developed an Android app for salon booking and management with role-based access for customers and salon owners. The app includes features for appointment scheduling, service catalog, and payment processing.",
-                tech: "Flutter, Firebase",
-                date: "2023",
-                category: "Mobile Development",
-                link: "pages/glamazon.html"
-            },
-            project7: {
-                name: "JobQuest Application",
-                description: "Comprehensive job search and recruitment platform that connects job seekers with employers. Features include advanced job search filters, application tracking, profile management, and real-time notifications.",
-                tech: "Flutter, Firebase, Cloud Firestore",
-                date: "2024",
-                category: "Mobile Development",
-                link: "pages/jobquest.html"
-            },
-            project8: {
-                name: "Veloce Bike App",
-                description: "Smart bike rental application with QR code scanning for quick bike unlocking, real-time bike tracking, rental history, and seamless payment integration for urban mobility.",
-                tech: "Flutter, Firebase, QR Scanner",
-                date: "2024",
-                category: "Mobile Development",
-                link: "pages/veloce.html"
-            },
-            project5: {
-                name: "Pahappa Goals Bucket (PGB) System",
-                description: "Contributed to a KPI tracking system enabling goal setting, performance reviews, and dashboards for employees and executives. This enterprise system helps organizations align individual goals with company objectives.",
-                tech: "Java, Spring Boot, Hibernate, JSF (PrimeFaces), MySQL",
-                date: "2023",
-                category: "Enterprise Systems",
-                link: "#"
-            },
-            project6: {
-                name: "MedCare HMS",
-                description: "Extended a hospital management system with features for medical records, billing, file attachments, and pagination. This system helps healthcare providers manage patient information and streamline administrative processes.",
-                tech: "Java, JSF, Hibernate, MySQL, JSF (PrimeFaces)",
-                date: "2023",
-                category: "Healthcare Systems",
-                link: "#"
-            }
-        };
-
-        function showProjectDetails(projectId) {
-            const project = projects[projectId];
-            if (!project) return;
-            
-            document.getElementById('modal-project-name').textContent = project.name;
-            document.getElementById('modal-project-description').textContent = project.description;
-            document.getElementById('modal-project-tech').textContent = project.tech;
-            document.getElementById('modal-project-date').textContent = project.date;
-            document.getElementById('modal-project-category').textContent = project.category;
-            document.getElementById('modal-project-link').href = project.link;
-            
-            // Clear existing images
-            const imagesContainer = document.getElementById('modal-project-images');
-            imagesContainer.innerHTML = '';
-            
-            // Add placeholder image (in a real scenario, you would use actual project images)
-            const img = document.createElement('img');
-            img.src = `images/project/${projectId}.jpg`;
-            img.alt = project.name;
-            imagesContainer.appendChild(img);
-            
-            // Show modal
-            document.getElementById('project-details').style.display = 'block';
-            document.querySelector('.modal-overlay').style.display = 'block';
-        }
-
-        function hideProjectDetails() {
-            document.getElementById('project-details').style.display = 'none';
-            document.querySelector('.modal-overlay').style.display = 'none';
-        }
-
-        function showContact() {
-            document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
-        }
+    <!-- Structured data for search engines. Keep "sameAs" in step with the social links in src/data/site.js. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "%SITE_URL%/#website",
+            "url": "%SITE_URL%/",
+            "name": "Nuwarinda Albert",
+            "description": "Portfolio of Nuwarinda Albert, a computer scientist and software developer in Kampala, Uganda: projects, skills, experience and how to get in touch.",
+            "inLanguage": "en",
+            "publisher": { "@id": "%SITE_URL%/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "%SITE_URL%/#person",
+            "name": "Nuwarinda Albert",
+            "url": "%SITE_URL%/",
+            "image": "%SITE_URL%/og-image.jpg",
+            "jobTitle": "Software Developer",
+            "description": "Computer scientist and software developer building full-stack, mobile and AI-powered software.",
+            "address": { "@type": "PostalAddress", "addressLocality": "Kampala", "addressCountry": "UG" },
+            "sameAs": [
+              "https://github.com/Alberto-G1",
+              "https://www.linkedin.com/in/albert-nuwarinda-129841351/"
+            ],
+            "knowsAbout": [
+              "Software development",
+              "Full-stack web development",
+              "Mobile app development",
+              "Machine learning",
+              "System design"
+            ]
+          }
+        ]
+      }
     </script>
-</body>
+
+    <!-- Applies the saved theme before first paint so there is no flash.
+         Mirrors src/context/themeConfig.js (read + apply logic); keep in step. -->
+    <script>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var saved = {};
+          try {
+            saved = JSON.parse(localStorage.getItem('portfolio-theme')) || {};
+          } catch (e) {}
+
+          // Anything other than an explicit light/dark means "system".
+          var dark =
+            saved.mode === 'dark' ||
+            (saved.mode !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          var key = dark ? 'dark' : 'light';
+          root.setAttribute('data-theme', key);
+
+          var custom = (saved.overrides && saved.overrides[key]) || {};
+          var hex = /^#[0-9a-f]{6}$/i;
+          ['accent', 'heading', 'hover'].forEach(function (name) {
+            if (typeof custom[name] === 'string' && hex.test(custom[name])) {
+              root.style.setProperty('--' + name, custom[name]);
+            }
+          });
+
+          // --accent-contrast: white or navy, whichever reads better on the accent.
+          if (typeof custom.accent === 'string' && hex.test(custom.accent)) {
+            var lin = function (i) {
+              var c = parseInt(custom.accent.substr(i, 2), 16) / 255;
+              return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+            };
+            var bg = 0.2126 * lin(1) + 0.7152 * lin(3) + 0.0722 * lin(5) + 0.05;
+            var navy = 0.0059 + 0.05; // luminance of #0b1220, plus the 0.05 offset
+            root.style.setProperty('--accent-contrast', bg / navy >= 1.05 / bg ? '#0b1220' : '#ffffff');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Non-blocking: a slow font host must never hold up first paint. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Playfair+Display:wght@600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+  </head>
+  <body>
+    <!-- What crawlers, link unfurlers and AI tools that do not run JavaScript read: a plain-HTML copy of the portfolio,
+         written into the marker below at build time from scripts/static-content.html (see scripts/generate-seo.mjs). -->
+    <noscript>
+      <!--STATIC_CONTENT-->
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

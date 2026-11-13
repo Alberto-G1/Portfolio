@@ -1,0 +1,540 @@
+/*
+  Desktop: two columns (heading, intro and the floating scene on the left ~45%; the Experience/Education switch and the
+  timeline on the right ~55%), then a full-width bottom row with the stats and the call to action.
+  Under 1024px the heading block goes on top, the scene is smaller and centred, and the timeline is full width below.
+*/
+.experience {
+  position: relative;
+  padding-block: 5.5rem 6.5rem;
+  /* `clip`, not `hidden`: hidden would turn the section into a scroll container and stop the scene sticking */
+  overflow-x: clip;
+  isolation: isolate;
+  background: var(--bg);
+}
+
+/* ---------- Decoration (behind everything) ---------- */
+.experience-decor {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.experience-watermark {
+  position: absolute;
+  top: 3rem;
+  left: 36%;
+  width: min(30rem, 40vw);
+  height: auto;
+  opacity: 0.08;
+}
+
+.experience-dots--top {
+  top: 4.5rem;
+  right: 4%;
+  width: 14rem;
+  height: 8rem;
+}
+
+.experience-dots--middle {
+  top: 55%;
+  left: 0;
+  width: 6rem;
+  height: 9rem;
+}
+
+.experience-swoosh {
+  width: min(32vw, 26rem);
+  height: min(10vw, 8rem);
+  opacity: 0.4;
+}
+
+/* ---------- Layout ---------- */
+.experience-container {
+  width: min(100% - 2 * clamp(1.5rem, 5vw, 6rem), 88rem);
+  margin-inline: auto;
+}
+
+.experience-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  align-items: stretch; /* the left column is as tall as the timeline, so the scene can stay in view beside it */
+  gap: clamp(2rem, 4vw, 4rem);
+}
+
+.experience-layout--solo {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.experience-left {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.experience-right {
+  min-width: 0;
+}
+
+/* The intro has a 4px gold bar on its left */
+.experience-intro {
+  position: relative;
+  max-width: 32rem;
+  padding-left: 1.4rem;
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.experience-intro::before {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  left: 0;
+  width: 4px;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+/* ---------- The scene: floats gently, over a soft blue-and-gold glow behind its platform ---------- */
+.experience-visual {
+  flex: 1;
+  margin-top: 2rem;
+}
+
+.experience-scene {
+  position: sticky;
+  top: calc(var(--navbar-height) + 1.5rem);
+  width: min(100%, 36rem);
+}
+
+.experience-scene-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  animation: experience-float 6s ease-in-out infinite;
+}
+
+.experience-glow {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  z-index: 0;
+  width: 118%;
+  aspect-ratio: 2.3;
+  background:
+    radial-gradient(ellipse at 30% 55%, color-mix(in srgb, var(--scene-blue) 55%, transparent) 0%, transparent 62%),
+    radial-gradient(ellipse at 72% 55%, color-mix(in srgb, var(--accent) 46%, transparent) 0%, transparent 62%);
+  /* the gradients above reach past this box, so fade the whole thing to nothing before its edges
+     (otherwise the box shows as a rectangle) */
+  -webkit-mask-image: radial-gradient(closest-side, #000 45%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 45%, transparent 100%);
+  opacity: 0.8;
+  transform: translateX(-50%);
+  animation: experience-pulse 5s ease-in-out infinite;
+}
+
+:root:not([data-theme="dark"]) .experience-glow {
+  opacity: 0.4;
+}
+
+@keyframes experience-float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes experience-pulse {
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.06);
+  }
+}
+
+/* ---------- The switch: a glass pill, the active half solid gold ---------- */
+.exp-tabs {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(100%, 24rem);
+  padding: 0.3rem;
+  margin-bottom: 1.75rem;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.exp-tabs-thumb {
+  position: absolute;
+  top: 0.3rem;
+  bottom: 0.3rem;
+  left: 0.3rem;
+  width: calc(50% - 0.3rem);
+  background: var(--accent);
+  border-radius: 999px;
+  box-shadow: var(--glow);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exp-tabs[data-tab="education"] .exp-tabs-thumb {
+  transform: translateX(100%);
+}
+
+.exp-tab {
+  position: relative;
+  z-index: 1;
+  padding: 0.7rem 1.25rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.2;
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  transition: color var(--transition);
+}
+
+.exp-tab[aria-selected="true"] {
+  color: var(--accent-contrast); /* navy on the gold half */
+}
+
+.exp-tab[aria-selected="false"]:hover {
+  color: var(--accent-text);
+}
+
+.exp-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Timeline: a gold line on the left that fills from the top, a glowing ring node beside each card ---------- */
+.exp-timeline {
+  --node-size: 1.5rem;
+  --node-gap: 3.75rem; /* node + the short connector, before the card starts */
+  --node-y: 2.15rem; /* where, down the card, the node sits */
+  --line-progress: 1; /* 0..1, written by useTimelineProgress; full if it never runs */
+  --line-top: 2rem;
+  --line-height: 0px;
+  position: relative;
+}
+
+.exp-line {
+  position: absolute;
+  top: var(--line-top);
+  left: calc(var(--node-size) / 2 - 1px);
+  width: 2px;
+  height: var(--line-height);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-radius: 2px;
+}
+
+.exp-line-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--accent), var(--hover));
+  border-radius: 2px;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 70%, transparent);
+  transform: scaleY(var(--line-progress));
+  transform-origin: top;
+}
+
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.exp-item {
+  position: relative;
+  padding-left: var(--node-gap);
+}
+
+.exp-node {
+  position: absolute;
+  top: calc(var(--node-y) - var(--node-size) / 2);
+  left: 0;
+  width: var(--node-size);
+  height: var(--node-size);
+  background: var(--brand-navy); /* the dark centre */
+  border: 3px solid var(--accent); /* the gold ring */
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 0 16px color-mix(in srgb, var(--accent) 75%, transparent);
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* The short gold connector from the node to its card */
+.exp-node::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: calc(var(--node-gap) - var(--node-size) - 0.35rem);
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 45%, transparent));
+  transform: translateY(-50%);
+  transition: opacity 0.4s ease;
+}
+
+/* A node the line has not reached yet is dim */
+.exp-node.is-dim {
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  box-shadow: none;
+}
+
+.exp-node.is-dim::after {
+  opacity: 0.35;
+}
+
+/* the Key Skills card is where the line ends: its node sits at the card's clipped corner */
+.exp-item--end {
+  --node-y: 2.5rem;
+}
+
+.exp-item--end .exp-node {
+  top: calc(2.5rem - var(--node-size) / 2);
+}
+
+/* ---------- Bottom row ---------- */
+.exp-bottom {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.75rem);
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+.exp-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exp-stat {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding-inline: clamp(1.25rem, 2.5vw, 2.25rem);
+}
+
+.exp-stat:first-child {
+  padding-left: 0;
+}
+
+/* thin gold vertical dividers between the stats */
+.exp-stat + .exp-stat::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 1px;
+  height: 3rem;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  transform: translateY(-50%);
+}
+
+.exp-stat > svg {
+  flex: none;
+  color: var(--accent);
+  font-size: 2rem;
+}
+
+.exp-stat-value {
+  color: var(--heading);
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 1.3rem + 1vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.exp-stat-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* a gold line that runs out to the left of the button (or from the stats, when there are any) */
+.exp-bottom-line {
+  flex: 1 1 3rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent));
+}
+
+/* "Let's Work Together": outlined gold pill; on hover it fills gold with navy text and the arrow slides */
+.exp-cta {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 0.95rem 2.1rem;
+  color: var(--heading);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.exp-cta svg {
+  color: var(--accent-text);
+  transition:
+    color var(--transition),
+    transform var(--transition);
+}
+
+.exp-cta:hover,
+.exp-cta:focus-visible {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+}
+
+.exp-cta:hover svg,
+.exp-cta:focus-visible svg {
+  color: var(--accent-contrast);
+  transform: translateX(6px);
+}
+
+.exp-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1023.98px) {
+  .experience {
+    padding-block: 4.5rem 5.5rem;
+  }
+
+  .experience-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .experience-visual {
+    flex: none;
+    margin-top: 1.5rem;
+  }
+
+  /* the scene: smaller, centred, no longer sticky */
+  .experience-scene {
+    position: relative;
+    top: auto;
+    width: min(100%, 26rem);
+    margin-inline: auto;
+  }
+
+  .experience-watermark {
+    display: none;
+  }
+}
+
+@media (max-width: 639.98px) {
+  /* keep the glow's box inside the screen */
+  .experience-glow {
+    width: 100%;
+  }
+
+  .exp-timeline {
+    --node-size: 1.15rem;
+    --node-gap: 2.1rem;
+    --node-y: 3.4rem; /* level with the small logo panel at the top of each card */
+  }
+
+  .exp-item--end {
+    --node-y: 2.2rem;
+  }
+
+  .exp-item--end .exp-node {
+    top: calc(2.2rem - var(--node-size) / 2);
+  }
+
+  .exp-node {
+    border-width: 2.5px;
+  }
+
+  .exp-list {
+    gap: 1.1rem;
+  }
+
+  .exp-tabs {
+    width: 100%;
+  }
+
+  /* the stats sit above the button, which goes full width */
+  .exp-bottom {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.75rem;
+  }
+
+  .exp-stats {
+    justify-content: space-between;
+  }
+
+  .exp-stat {
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-inline: 0.75rem;
+    text-align: center;
+  }
+
+  .exp-stat > div {
+    text-align: center;
+  }
+
+  .exp-stat:first-child {
+    padding-left: 0;
+  }
+
+  .exp-stat:last-child {
+    padding-right: 0;
+  }
+
+  .exp-bottom-line {
+    display: none;
+  }
+
+  .exp-cta {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-scene-img,
+  .experience-glow {
+    animation: none;
+  }
+
+  .exp-cta:hover,
+  .exp-cta:focus-visible,
+  .exp-cta:hover svg,
+  .exp-cta:focus-visible svg {
+    transform: none;
+  }
+}

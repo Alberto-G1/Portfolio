@@ -1,0 +1,112 @@
+/* The buttons sit above a card's "click anywhere to open" layer (z-index 1 there), so they stay clickable */
+.project-links {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.project-btn {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.project-btn svg {
+  flex: none;
+  font-size: 0.95em;
+}
+
+/* Live Demo: solid gold */
+.project-btn--solid {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.project-btn--solid:hover {
+  background: var(--hover);
+  border-color: var(--hover);
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+}
+
+/* View Code: outlined; View Details (featured): the same, but a real button */
+.project-btn--outline,
+.project-btn--ghost {
+  color: var(--heading);
+  background: transparent;
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  cursor: pointer;
+}
+
+.project-btn--outline:hover,
+.project-btn--ghost:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Private Code: not a link, so it must not look like one (and it doesn't stretch like a button) */
+.project-btn--muted {
+  flex: 0 0 auto;
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border-color: color-mix(in srgb, var(--text) 14%, transparent);
+  cursor: default;
+}
+
+.project-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* A card with no buttons: just a quiet "View Details ->" in the footer (the whole card opens the project) */
+.project-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-text);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.project-hint svg {
+  transition: transform var(--transition);
+}
+
+.project-card:hover .project-hint svg {
+  transform: translateX(4px);
+}
+
+@media (max-width: 639.98px) {
+  .project-btn {
+    padding-block: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-btn:hover,
+  .project-card:hover .project-hint svg {
+    transform: none;
+  }
+}

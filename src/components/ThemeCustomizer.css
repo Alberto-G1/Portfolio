@@ -1,0 +1,595 @@
+/*
+  The theme customizer: a floating palette button and a card that opens above it.
+
+  Every colour here comes from the theme variables, so the card re-tints itself with whatever preset is picked:
+  the header, the active pill, the button and the footer wave all use --accent-deep (a dark shade of the accent,
+  see theme.css), with white lettering drawn as `Canvas` inside a light colour scheme (white in either mode).
+*/
+
+/* ---------- Floating button ---------- */
+.tc-fab {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  font-size: 1.4rem;
+  color-scheme: light;
+  color: Canvas;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent-deep) 65%, var(--accent)), var(--accent-deep));
+  border: 0;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 65%, transparent),
+    0 10px 24px -6px color-mix(in srgb, var(--accent-deep) 70%, transparent),
+    var(--glow);
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.tc-fab:hover {
+  transform: scale(1.07);
+  box-shadow:
+    0 0 0 3px var(--hover),
+    0 10px 24px -6px color-mix(in srgb, var(--accent-deep) 70%, transparent),
+    var(--glow);
+}
+
+/* ---------- The card ---------- */
+.tc-panel {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 5.75rem;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  width: min(24rem, calc(100vw - 2.5rem));
+  max-height: calc(100vh - 7.25rem);
+  max-height: calc(100dvh - 7.25rem);
+  overflow: hidden;
+  color: var(--text);
+  background: var(--surface-solid);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius: 1.75rem;
+  box-shadow:
+    0 28px 60px -14px color-mix(in srgb, var(--accent-deep) 55%, transparent),
+    var(--shadow);
+  outline: none;
+  animation: tc-slide-in 0.28s ease both;
+}
+
+@keyframes tc-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Header: a rich dark shade of the accent, with a glowing wave along its lower edge ---------- */
+.tc-header {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.25rem 2.5rem;
+  color-scheme: light;
+  color: Canvas;
+  background:
+    radial-gradient(ellipse 65% 130% at 100% 0, color-mix(in srgb, var(--accent) 42%, transparent), transparent 70%),
+    linear-gradient(120deg, var(--accent-deep), color-mix(in srgb, var(--accent-deep) 62%, var(--accent)));
+}
+
+.tc-header-icon {
+  display: grid;
+  place-items: center;
+  font-size: 2.1rem;
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--accent-deep) 60%, transparent));
+}
+
+.tc-header-divider {
+  align-self: stretch;
+  width: 1px;
+  margin-block: 0.2rem;
+  background: color-mix(in srgb, Canvas 40%, transparent);
+}
+
+.tc-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.tc-title {
+  margin: 0;
+  color: inherit; /* the global heading colour would be navy on the dark header */
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tc-subtitle {
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.88;
+}
+
+.tc-close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  align-self: flex-start;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  font-size: 1.35rem;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  transition: background-color var(--transition);
+}
+
+.tc-close:hover {
+  background: color-mix(in srgb, Canvas 20%, transparent);
+}
+
+.tc-close:focus-visible {
+  outline: 2px solid Canvas;
+  outline-offset: 1px;
+}
+
+/* The wave: the body colour rises into the header (::before), with a thin accent line along its edge (.tc-wave).
+   The shape is an SVG used as a mask, so only its outline matters, not its colour. */
+.tc-header::before,
+.tc-wave {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2.3rem;
+  pointer-events: none;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.tc-header::before {
+  content: "";
+  background: var(--surface-solid);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 26C60 40 130 10 210 16S350 36 400 8V40H0Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 26C60 40 130 10 210 16S350 36 400 8V40H0Z'/%3E%3C/svg%3E");
+}
+
+.tc-wave {
+  background: linear-gradient(90deg, transparent, var(--accent) 38%, var(--hover) 78%, transparent);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 26C60 40 130 10 210 16S350 36 400 8' fill='none' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 40' preserveAspectRatio='none'%3E%3Cpath d='M0 26C60 40 130 10 210 16S350 36 400 8' fill='none' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* ---------- Body (scrolls on its own, so the header and the footer stay put) ---------- */
+.tc-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0.25rem 1.25rem 1.1rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.tc-group {
+  min-width: 0;
+  padding: 0;
+  margin: 0 0 1.2rem;
+  border: 0;
+}
+
+.tc-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0;
+  margin-bottom: 0.7rem;
+  color: var(--heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.tc-label svg {
+  flex: none;
+  color: var(--accent-text);
+  font-size: 1.3rem;
+}
+
+.tc-label-sub {
+  color: var(--text-muted);
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.tc-hint {
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.tc-divider {
+  height: 1px;
+  margin: 0 0 1.05rem;
+  background: var(--border);
+  border: 0;
+}
+
+/* ---------- Mode: three pills, the active one filled ---------- */
+.tc-segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: inset 0 2px 5px color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.tc-segmented button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.tc-segmented button svg {
+  flex: none;
+  font-size: 1.1rem;
+}
+
+.tc-segmented button:not([aria-pressed="true"]):hover {
+  color: var(--accent-text);
+  background: var(--surface-solid);
+}
+
+.tc-segmented button[aria-pressed="true"] {
+  color-scheme: light;
+  color: Canvas;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent-deep) 65%, var(--accent)), var(--accent-deep));
+  box-shadow: 0 6px 14px -6px color-mix(in srgb, var(--accent-deep) 80%, transparent);
+}
+
+/* ---------- Presets: round glossy swatches (accent ring, darker centre), a tick on the chosen one ---------- */
+.tc-swatches {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem 0.5rem;
+  justify-items: center;
+}
+
+.tc-swatch {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  aspect-ratio: 1;
+  padding: 0;
+  background: radial-gradient(circle at 32% 26%, var(--sw-hover), var(--sw-accent) 72%);
+  border: 0;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--text) 12%, transparent),
+    0 7px 14px -5px color-mix(in srgb, var(--sw-accent) 75%, transparent);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+/* the darker centre (the fallback mixes with the brand navy; browsers with relative colours darken the swatch itself) */
+.tc-swatch::after {
+  content: "";
+  position: absolute;
+  inset: 27%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--sw-accent) 70%, var(--brand-navy)),
+    color-mix(in srgb, var(--sw-accent) 45%, var(--brand-navy))
+  );
+  border-radius: 50%;
+  box-shadow: inset 0 2px 5px color-mix(in srgb, var(--brand-navy) 45%, transparent);
+}
+
+@supports (color: oklch(from red l c h)) {
+  .tc-swatch::after {
+    background: radial-gradient(
+      circle at 35% 30%,
+      oklch(from var(--sw-accent) calc(l * 0.74) c h),
+      oklch(from var(--sw-accent) calc(l * 0.55) c h)
+    );
+  }
+}
+
+.tc-swatch:hover {
+  transform: translateY(-2px) scale(1.06);
+}
+
+.tc-swatch[aria-pressed="true"] {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+.tc-swatch-check {
+  position: relative;
+  z-index: 1;
+  color-scheme: light;
+  color: Canvas;
+  font-size: 1.2rem;
+  stroke-width: 3;
+}
+
+.tc-badge {
+  position: absolute;
+  right: -0.35rem;
+  bottom: -0.35rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  font-size: 0.78rem;
+  color: var(--surface-solid);
+  background: var(--text);
+  border: 2px solid var(--surface-solid);
+  border-radius: 50%;
+}
+
+.tc-badge svg {
+  stroke-width: 3;
+}
+
+/* the name of the active preset (or "Custom") */
+.tc-preset-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem 0.35rem 0.8rem;
+  margin: 0.9rem 0 0;
+  color: var(--accent-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  border-radius: 999px;
+}
+
+.tc-preset-name svg {
+  font-size: 1.1rem;
+}
+
+/* ---------- Colour rows: a big picker swatch, the name with its hex code, and a live sample ---------- */
+.tc-color {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.65rem;
+}
+
+.tc-color-input {
+  width: 3.4rem;
+  height: 2.6rem;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 0.85rem;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--text) 12%, transparent),
+    0 6px 12px -4px color-mix(in srgb, var(--text) 30%, transparent);
+  cursor: pointer;
+}
+
+.tc-color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.tc-color-input::-webkit-color-swatch {
+  border: 0;
+  border-radius: 0.85rem;
+}
+
+.tc-color-input::-moz-color-swatch {
+  border: 0;
+  border-radius: 0.85rem;
+}
+
+.tc-color-input:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+}
+
+.tc-color-label {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: var(--heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.tc-color-label code {
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.tc-preview {
+  display: block;
+  width: 6.4rem;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 0.8rem;
+}
+
+.tc-preview--accent {
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.tc-preview--heading {
+  color: var(--heading);
+  font-weight: 700;
+  background: var(--bg-alt);
+  border-color: var(--border);
+}
+
+.tc-preview--hover {
+  box-shadow: 0 6px 12px -6px color-mix(in srgb, var(--hover) 70%, transparent);
+}
+
+/* ---------- Reset ---------- */
+.tc-reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-top: 1.1rem;
+  color: var(--accent-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: transparent;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+  border-radius: 999px;
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition);
+}
+
+.tc-reset svg {
+  font-size: 1.15rem;
+}
+
+.tc-reset:hover {
+  color: var(--hover-text);
+  background: var(--accent-soft);
+  border-color: var(--hover);
+}
+
+/* ---------- Footer strip: a tagline, with the header's wave sweeping in from the right ---------- */
+.tc-foot {
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.5rem 1.25rem 0.95rem;
+  margin: 0;
+  overflow: hidden;
+  color: var(--accent-text);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 500;
+  background: var(--bg-alt);
+  isolation: isolate;
+}
+
+.tc-foot svg {
+  flex: none;
+  font-size: 1.25rem;
+}
+
+.tc-foot::before,
+.tc-foot::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.tc-foot::before {
+  background: linear-gradient(100deg, transparent 35%, color-mix(in srgb, var(--accent-deep) 60%, var(--accent)), var(--accent-deep));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M170 60C250 59 330 40 400 0V60Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M170 60C250 59 330 40 400 0V60Z'/%3E%3C/svg%3E");
+}
+
+.tc-foot::after {
+  background: linear-gradient(90deg, transparent, var(--accent) 45%, var(--hover));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M170 58C250 57 330 38 400 -2' fill='none' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M170 58C250 57 330 38 400 -2' fill='none' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E");
+}
+
+/* ---------- Phones: a full-width bottom sheet ---------- */
+@media (max-width: 480px) {
+  .tc-panel {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 90vh;
+    max-height: 90dvh;
+    border-width: 1px 0 0;
+    border-radius: 1.75rem 1.75rem 0 0;
+    animation-name: tc-slide-up;
+  }
+
+  .tc-foot {
+    padding-bottom: calc(0.95rem + env(safe-area-inset-bottom));
+  }
+}
+
+@keyframes tc-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tc-panel {
+    animation: none;
+  }
+
+  .tc-fab:hover,
+  .tc-swatch:hover {
+    transform: none;
+  }
+}

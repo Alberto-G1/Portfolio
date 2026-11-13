@@ -1,0 +1,18 @@
+/*
+  The project colour as text. Dark mode: never darker than OKLCH lightness 0.62 so it reads on navy.
+  Light mode: never lighter than 0.5 so it reads on white. (Browsers without relative colour syntax just
+  get the plain project colour.)
+*/
+.project-title-accent {
+  color: var(--project-color, var(--accent-text));
+}
+
+@supports (color: oklch(from red l c h)) {
+  .project-title-accent {
+    color: oklch(from var(--project-color, var(--accent-text)) max(l, 0.62) c h);
+  }
+
+  :root:not([data-theme="dark"]) .project-title-accent {
+    color: oklch(from var(--project-color, var(--accent-text)) min(l, 0.5) c h);
+  }
+}

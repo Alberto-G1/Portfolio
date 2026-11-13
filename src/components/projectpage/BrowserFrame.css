@@ -1,0 +1,207 @@
+.bf {
+  position: relative;
+  padding-bottom: 1rem;
+  perspective: 1400px;
+}
+
+/* a large soft radial glow in the project colour behind everything */
+.bf-glow {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  z-index: 0;
+  width: 125%;
+  aspect-ratio: 1.15;
+  background: radial-gradient(
+    ellipse closest-side,
+    color-mix(in srgb, var(--project-color) 55%, transparent) 0%,
+    color-mix(in srgb, var(--project-color) 16%, transparent) 55%,
+    transparent 100%
+  );
+  opacity: 0.7;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+:root:not([data-theme="dark"]) .bf-glow {
+  opacity: 0.34;
+}
+
+.bf-float {
+  position: relative;
+  z-index: 1;
+  animation: bf-float 6s ease-in-out infinite;
+}
+
+@keyframes bf-float {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.bf-tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+/* tilted in 3D, straightening on hover: only for a mouse, with motion allowed, on a wide screen */
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .bf-tilt {
+    transform: rotateY(-8deg) rotateX(2deg);
+  }
+
+  .bf:hover .bf-tilt {
+    transform: rotateY(0) rotateX(0);
+  }
+}
+
+.bf-frame {
+  overflow: hidden;
+  background: color-mix(in srgb, var(--surface-solid) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 1.1rem;
+  box-shadow:
+    0 24px 50px -18px color-mix(in srgb, var(--project-color) 55%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--project-color) 22%, transparent),
+    var(--shadow);
+}
+
+/* the glass title bar: three dots (red, yellow, green) and a fake address pill */
+.bf-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem 0.9rem;
+  background: color-mix(in srgb, var(--text) 7%, var(--surface));
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.bf-dots {
+  display: flex;
+  flex: none;
+  gap: 0.4rem;
+}
+
+.bf-dots i {
+  display: block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+}
+
+.bf-dots i:nth-child(1) {
+  background: var(--pd-bad);
+}
+
+.bf-dots i:nth-child(2) {
+  background: var(--accent);
+}
+
+.bf-dots i:nth-child(3) {
+  background: var(--pd-good);
+}
+
+.bf-address {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.9rem;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: 999px;
+}
+
+.bf-address svg {
+  flex: none;
+  font-size: 0.7rem;
+  color: var(--accent-text);
+}
+
+.bf-screen {
+  background: var(--bg-alt);
+}
+
+/* ---------- The glowing oval platform, with rings in gold and the project colour ---------- */
+.bf-platform {
+  position: relative;
+  z-index: 1;
+  height: 4.2rem;
+  margin: -0.4rem 6% 0;
+}
+
+.bf-ring,
+.bf-disc {
+  position: absolute;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.bf-ring--outer {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid color-mix(in srgb, var(--project-color) 70%, transparent);
+  box-shadow:
+    0 0 22px color-mix(in srgb, var(--project-color) 60%, transparent),
+    inset 0 0 22px color-mix(in srgb, var(--project-color) 35%, transparent);
+}
+
+.bf-ring--gold {
+  top: 0.55rem;
+  width: 88%;
+  height: calc(100% - 1.1rem);
+  border: 2px solid var(--accent);
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--accent) 65%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.bf-ring--project {
+  top: 1.1rem;
+  width: 74%;
+  height: calc(100% - 2.2rem);
+  border: 2px solid color-mix(in srgb, var(--project-color) 55%, transparent);
+}
+
+.bf-disc {
+  top: 1.3rem;
+  width: 66%;
+  height: calc(100% - 2.6rem);
+  background: radial-gradient(
+    ellipse closest-side,
+    color-mix(in srgb, var(--project-color) 45%, transparent),
+    color-mix(in srgb, var(--accent) 18%, transparent) 70%,
+    transparent
+  );
+}
+
+:root:not([data-theme="dark"]) .bf-ring--outer,
+:root:not([data-theme="dark"]) .bf-ring--gold {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+@media (max-width: 1023.98px) {
+  .bf {
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+
+  .bf-platform {
+    height: 3.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-float {
+    animation: none;
+  }
+}

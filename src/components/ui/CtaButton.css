@@ -1,0 +1,78 @@
+/*
+  Dark mode: gold fill, navy text, gold glow.
+  Light mode: navy fill, white text, with a soft gold under-glow.
+  All of it comes from --cta-bg / --cta-text / --cta-shadow (theme.css), so the
+  customizer's accent recolours it.
+*/
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  color: var(--cta-text);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  background: var(--cta-bg);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px;
+  box-shadow: var(--cta-shadow);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.cta-btn svg {
+  flex: none;
+  font-size: 1.05em;
+  transition: transform var(--transition);
+}
+
+.cta-btn:hover {
+  color: var(--accent-contrast);
+  background: var(--hover);
+  border-color: var(--hover);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--hover) 55%, transparent);
+  transform: translateY(-1px);
+}
+
+.cta-btn:hover svg {
+  transform: translate(2px, -2px) rotate(-8deg);
+}
+
+/* Arrow variant: the icon (after the label) slides right instead of the plane taking off */
+.cta-btn--arrow:hover svg {
+  transform: translateX(5px);
+}
+
+/* Gold tone: solid gold with navy text in both modes, glowing a little more on hover */
+.cta-btn--gold {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+/* The end chevron slides right on hover (the leading plane still takes off) */
+.cta-btn--end:hover .cta-btn-end {
+  transform: translateX(5px);
+}
+
+.cta-btn:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-btn:hover,
+  .cta-btn:hover svg,
+  .cta-btn--arrow:hover svg,
+  .cta-btn--end:hover .cta-btn-end {
+    transform: none;
+  }
+}

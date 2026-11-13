@@ -1,0 +1,359 @@
+/*
+  Desktop: the top row is two columns (heading + intro on the left, the filter tabs and the featured card on
+  the right), with the project grid (4 per row) and the "Explore All Projects" button underneath.
+  Under 1200px the heading sits above the filters and featured card (full width) and the grid has 3 columns;
+  under 1024px the featured card stacks and the grid has 2; under 640px it is one column.
+*/
+.projects {
+  position: relative;
+  padding-block: 5.5rem 7rem;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bg-alt);
+}
+
+/* ---------- Decoration (behind everything) ---------- */
+.projects-decor {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.projects-watermark {
+  position: absolute;
+  top: 3rem;
+  left: 30%;
+  width: min(30rem, 40vw);
+  height: auto;
+  opacity: 0.08;
+}
+
+.projects-dots--top {
+  top: 4.5rem;
+  right: 4%;
+  width: 14rem;
+  height: 8rem;
+}
+
+.projects-dots--middle {
+  top: 48%;
+  left: 0;
+  width: 6rem;
+  height: 9rem;
+}
+
+.projects-swoosh {
+  width: min(32vw, 26rem);
+  height: min(10vw, 8rem);
+  opacity: 0.4;
+}
+
+/* ---------- Layout ---------- */
+.projects-container {
+  width: min(100% - 2 * clamp(1.5rem, 5vw, 6rem), 88rem);
+  margin-inline: auto;
+}
+
+.projects-top {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
+  align-items: start;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+
+.projects-feature-col {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* The intro has a 4px gold bar on its left */
+.projects-intro {
+  position: relative;
+  max-width: 30rem;
+  padding-left: 1.4rem;
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.projects-intro::before {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  left: 0;
+  width: 4px;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+/* ---------- Filter tabs: glass pills, the active one solid gold ---------- */
+.projects-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.projects-filter {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem 0.55rem 0.85rem;
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.projects-filter svg {
+  flex: none;
+  color: var(--accent-text);
+  font-size: 0.95em;
+  transition: color var(--transition);
+}
+
+.projects-filter:hover {
+  color: var(--heading);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.projects-filter.is-active {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+.projects-filter.is-active svg {
+  color: var(--accent-contrast);
+}
+
+.projects-filter:focus-visible,
+.projects-more-btn:focus-visible,
+.projects-empty-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Project grid ---------- */
+.projects-results {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.projects-grid {
+  position: relative; /* the card that is leaving is lifted out of the flow, relative to this */
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.projects-grid-item {
+  display: flex;
+  min-width: 0;
+}
+
+/* ---------- Explore All: an outlined gold pill with thin gold lines running out to each side ---------- */
+.projects-more {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.75rem;
+}
+
+.projects-more::before,
+.projects-more::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+}
+
+.projects-more::before {
+  background: linear-gradient(90deg, transparent, var(--accent));
+}
+
+.projects-more::after {
+  background: linear-gradient(270deg, transparent, var(--accent));
+}
+
+.projects-more-btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 2rem;
+  color: var(--heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.projects-more-btn svg {
+  color: var(--accent-text);
+  transition: transform var(--transition);
+}
+
+.projects-more-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--hover);
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+}
+
+.projects-more-btn[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+/* ---------- Empty state ---------- */
+.projects-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 34rem;
+  padding: 2.5rem 1.5rem;
+  margin-inline: auto;
+  text-align: center;
+  background: var(--surface);
+  border: 1px dashed color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 1.5rem;
+}
+
+.projects-empty svg {
+  color: var(--accent-text);
+  font-size: 2.4rem;
+}
+
+.projects-empty h3 {
+  margin-top: 0.9rem;
+  font-size: 1.5rem;
+}
+
+.projects-empty p {
+  margin-top: 0.4rem;
+  color: var(--text-muted);
+}
+
+.projects-empty-btn {
+  padding: 0.65rem 1.5rem;
+  margin-top: 1.25rem;
+  color: var(--accent-contrast);
+  font-weight: 800;
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  transition:
+    background-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.projects-empty-btn:hover {
+  background: var(--hover);
+  box-shadow: var(--glow);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1199.98px) {
+  .projects-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .projects-intro {
+    max-width: 40rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .projects-watermark {
+    left: 45%;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .projects {
+    padding-block: 4.5rem 6rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects-watermark {
+    display: none;
+  }
+}
+
+/* A phone: the filter row scrolls sideways, with no visible scrollbar */
+@media (max-width: 767.98px) {
+  .projects-filters {
+    flex-wrap: nowrap;
+    padding: 0.4rem 0.25rem 0.7rem;
+    margin-inline: -0.25rem;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .projects-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .projects-more {
+    gap: 0.9rem;
+  }
+
+  .projects-more-btn {
+    padding-inline: 1.4rem;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .projects-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .projects-more::before,
+  .projects-more::after {
+    flex: 0 0 1.5rem;
+  }
+
+  .projects-more {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-filter:hover,
+  .projects-more-btn:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,26 @@
+/*
+  Centred at the bottom of the screen. left: 50% + translateX(-50%) means the button grows
+  symmetrically, to both sides, when it expands into the "Back to Top" pill on hover.
+  The look of the button itself is in ui/BackToTopButton.css.
+*/
+.back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  z-index: 990;
+  /* hidden: out of the tab order and the a11y tree, not just invisible */
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-50%, 0.5rem);
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    visibility 0s linear 0.25s;
+}
+
+.back-to-top.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition-delay: 0s;
+}

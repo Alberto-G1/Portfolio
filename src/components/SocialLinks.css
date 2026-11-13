@@ -1,0 +1,67 @@
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Round glass buttons; on hover they fill with the accent and glow. */
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--text);
+  font-size: 1.1rem;
+  text-decoration: none;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: 50%;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.social-link:hover {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+  transform: translateY(-2px);
+}
+
+/* Large outlined variant (Hero): a thin outline; on hover a gold border, gold icon and a glow (no fill) */
+.social-links--lg {
+  gap: 1rem;
+}
+
+.social-links--lg .social-link {
+  width: 3.25rem;
+  height: 3.25rem;
+  font-size: 1.3rem;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text) 26%, var(--border));
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.social-links--lg .social-link:hover {
+  color: var(--accent-text);
+  background: transparent;
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-link:hover {
+    transform: none;
+  }
+}

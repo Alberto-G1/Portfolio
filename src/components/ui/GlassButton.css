@@ -1,0 +1,48 @@
+/* A transparent pill with a 2px gold border. On hover it fills with the soft accent tint. */
+.glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.7rem;
+  color: var(--heading);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.glass-btn svg {
+  flex: none;
+  font-size: 1.05em;
+  transition: transform var(--transition);
+}
+
+.glass-btn:hover {
+  color: var(--heading);
+  background: var(--accent-soft);
+  border-color: var(--hover);
+  box-shadow: var(--glow);
+  transform: translateY(-1px);
+}
+
+.glass-btn:hover svg {
+  transform: translateY(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-btn:hover,
+  .glass-btn:hover svg {
+    transform: none;
+  }
+}

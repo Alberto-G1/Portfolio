@@ -1,0 +1,110 @@
+.theme-toggle {
+  flex: none;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.tt-icon {
+  flex: none;
+  font-size: 1.05rem;
+  transition: color var(--transition);
+}
+
+/* The icon of the active mode is bright; the other is muted. */
+.theme-toggle[data-mode="light"] .tt-icon--sun,
+.theme-toggle[data-mode="dark"] .tt-icon--moon {
+  color: var(--accent-contrast);
+}
+
+/* ---------- Pill (navbar) ---------- */
+.theme-toggle--pill {
+  --tt-thumb: 2.25rem;
+  --tt-pad: 0.25rem;
+  position: relative;
+  display: inline-flex;
+  padding: var(--tt-pad);
+  background: color-mix(in srgb, var(--heading) 7%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 3px color-mix(in srgb, var(--brand-navy) 18%, transparent);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition);
+}
+
+.theme-toggle--pill:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* Glowing gold circle that slides behind the active icon */
+.tt-thumb {
+  position: absolute;
+  top: 50%;
+  left: var(--tt-pad);
+  width: var(--tt-thumb);
+  height: var(--tt-thumb);
+  margin-top: calc(var(--tt-thumb) / -2);
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: var(--glow);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle--pill[data-mode="dark"] .tt-thumb {
+  transform: translateX(var(--tt-thumb));
+}
+
+.theme-toggle--pill .tt-icon {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: var(--tt-thumb);
+  height: var(--tt-thumb);
+  padding: calc((var(--tt-thumb) - 1.05rem) / 2);
+  color: var(--text-muted);
+}
+
+/* ---------- Switch (mobile menu): sun, toggle switch, moon ---------- */
+.theme-toggle--switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.25rem;
+  border-radius: 999px;
+}
+
+.theme-toggle--switch .tt-icon {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.theme-toggle--switch[data-mode="light"] .tt-icon--sun,
+.theme-toggle--switch[data-mode="dark"] .tt-icon--moon {
+  color: var(--accent);
+}
+
+.tt-track {
+  position: relative;
+  width: 3.1rem;
+  height: 1.65rem;
+  background: var(--accent);
+  border-radius: 999px;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.tt-knob {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: var(--surface-solid);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--brand-navy) 40%, transparent);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle--switch[data-mode="dark"] .tt-knob {
+  transform: translateX(1.45rem);
+}
